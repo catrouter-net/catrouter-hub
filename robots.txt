@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://catrouter-net.github.io/catrouter-hub/sitemap.xml

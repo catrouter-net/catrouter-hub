@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车 | CatRouter</title>
+<meta name="description" content="Opus 5.5（2026-07-24 发布，100 万上下文，12.8 万输出）能当主力的原因与三个坑：思考关不掉、同文本约多 30% token、thinking block 绑账号。含 effort 档位对照表。">
+<link rel="canonical" href="https://catrouter-net.github.io/catrouter-hub/claude-opus-5-5/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article"><meta property="og:title" content="Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车 | CatRouter">
+<meta property="og:description" content="Opus 5.5（2026-07-24 发布，100 万上下文，12.8 万输出）能当主力的原因与三个坑：思考关不掉、同文本约多 30% token、thinking block 绑账号。含 effort 档位对照表。">
+<meta property="og:url" content="https://catrouter-net.github.io/catrouter-hub/claude-opus-5-5/"><meta property="og:site_name" content="CatRouter 模型索引">
+<meta property="og:image" content="https://catrouter-net.github.io/catrouter-hub/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车", "description": "Opus 5.5（2026-07-24 发布，100 万上下文，12.8 万输出）能当主力的原因与三个坑：思考关不掉、同文本约多 30% token、thinking block 绑账号。含 effort 档位对照表。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/claude-opus-5-5/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车", "item": "https://catrouter-net.github.io/catrouter-hub/claude-opus-5-5/"}]}]</script>
+</head><body>
+<header class="top"><div class="shell"><a class="brand" href="../"><b>CatRouter</b><span>MODEL INDEX</span></a><nav class="navbar"><a href="../">模型索引</a><a href="../guide/">怎么挑中转站</a><a href="../claude-opus-5-5/" class="on">Opus 5.5 实测</a><a href="../gemini/">Gemini 双雄</a><a href="../price/">价格测算</a><a href="../setup/">三步接入</a><a href="../about/">关于本站</a></nav><div class="cta"><button class="copybtn" data-copy="https://catrouter.net/v1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5h10"/></svg>复制 BaseURL</button></div></div></header>
+<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车</div><h1>Claude Opus 5.5 中转实测：百万上下文能干什么，哪里会翻车</h1><p class="lede" style="margin-bottom:0">官方说法是多数任务达到 Fable 5.1 的水平、成本比 Opus 5 低约 40%。它不适合一句话问答，适合连跑几小时不能断的活。</p><div class="art-meta"><span>2026-07-24 发布</span><span>约 6 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
+<div class="callout"><b>先给结论</b>：想拿它当主力，前提是把 effort 档位调对。档位调错，账单会先翻车。</div>
+<h2>它到底是什么水平</h2>
+<p>7 月 24 日发布，100 万 token 上下文，单次输出 12.8 万 token（Batch 接口能到 300 万以内），输入支持文本与图像，知识截止 2026 年 6 月。与 Opus 4.8 相比，最实际的变化是成本档位往下挪了一格，能力没掉。</p>
+<p>用在中转上，感知最明显的是长任务：整仓代码审查、跨模块重构、几百页合同交叉比对，这类活以前必须拆成十几轮，现在可以一次喂进去。上下文腐烂在百万级场景依然存在，但比 4.x 时代收窄了不少。</p>
+
+<h2>三个必须提前知道的坑</h2>
+<h3>1. 思考模式关不掉</h3>
+<p>自适应思考是常开的。相比 Opus 5 这是破坏性变更——旧代码里显式禁用 thinking 会直接报错。正确做法不是关掉，而是用 effort 把推理深度压下来。</p>
+<h3>2. 同样文字，token 变多了</h3>
+<p>Claude 4.7 起换了新分词器，官方提示同样文本大约多算 30% token。做成本测算时别用 4.5 时代的「字符数 × 单价」估，会低估三成。这也是<a href="/catrouter-hub/price/">价格测算</a>里要按 token 算而不是按字数算的原因。</p>
+<h3>3. thinking block 绑账号</h3>
+<p>thinking block 与产生它的模型和会话绑定。把历史对话搬到另一个账号或另一条通道重放会报错。多环境切换时清空历史、只保留业务上下文更稳。</p>
+
+<h2>effort 怎么调才不浪费钱</h2>
+<table><colgroup><col style="width:26%"><col style="width:34%"><col style="width:40%"></colgroup>
+<thead><tr><th>任务</th><th>建议 effort</th><th>原因</th></tr></thead><tbody>
+<tr><td>分类、抽取、格式转换</td><td>低</td><td>不需要推理链，高档位纯烧钱</td></tr>
+<tr><td>代码修改、单测生成</td><td>中（默认）</td><td>官方默认档位就是为这类活调的</td></tr>
+<tr><td>跨模块重构、架构判断</td><td>高</td><td>需要长链路推理，低档位容易漏判</td></tr>
+<tr><td>疑难排障、根因分析</td><td>高，并配工具调用</td><td>单靠模型容易编，配合工具能自证</td></tr>
+</tbody></table>
+
+<h2>适合谁，不适合谁</h2>
+<p><strong>适合</strong>：跑长周期编码 Agent 的团队、要一次读完超长文档的分析岗、把办公自动化串起来的场景。<br>
+<strong>不适合</strong>：只做一句话翻译或简单问答——那用 Haiku 5.5 或 Sonnet 5.5，成本差好几倍。</p>
+<p>中转调用写 <code>claude-opus-5-5</code>。Anthropic 原生 SDK 的 base_url 填 <code>https://catrouter.net</code>，OpenAI 兼容协议填 <code>https://catrouter.net/v1</code>，两个不要混，混了就是 404。详细见<a href="/catrouter-hub/models/claude-opus-5-5/">该模型页</a>与<a href="/catrouter-hub/setup/">三步接入</a>。</p>
+<div class="sources"><h2>参考资料</h2><ul><li><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener nofollow">Anthropic 平台文档（Claude 模型与定价）</a></li><li><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1?category=cms" target="_blank" rel="noopener nofollow">Anthropic · Fable 5.1 发布说明（含 Opus 5 / Fable 5 对照跑分）</a></li></ul></div><div class="rel"><h2>接着看</h2><a class="linkbtn" href="/catrouter-hub/models/claude-opus-5-5/">Opus 5.5 详情</a><a class="linkbtn" href="/catrouter-hub/gemini/">Gemini 双雄</a><a class="linkbtn" href="/catrouter-hub/price/">价格测算</a></div><p style="margin-top:22px;font-size:12.5px;color:var(--slate)">本文由 CatRouter 技术组 整理，最后更新 2026-11-09。价格与跑分随厂商更新浮动，以官方页面为准；发现数据有误可在 <a href="https://github.com/catrouter-net/">GitHub</a> 提 issue。</p></div></div></main>
+<footer><div class="shell"><div class="foot-b"><span>© 2026 CatRouter</span><a href="https://catrouter.net">https://catrouter.net</a><a href="about/">编辑与数据说明</a><a href="https://github.com/catrouter-net/">GitHub 仓库</a><span>内容更新：2026-11-09</span></div></div></footer><div class="toast" id="toast">已复制</div><script src="app.js"></script></body></html>
