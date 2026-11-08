@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CatRouter 模型导航 · 28 个前沿模型，一个 BaseURL</title>
+<meta name="description" content="CatRouter 模型导航：28 个 2026 最新模型（Claude 5.5、GPT-6.1 Sol、Gemini 3.8 Flash、Grok 4.7、DeepSeek V4、Kimi K3、GLM-5.3、Seedance 2.5）国内直连接入指南，一个 BaseURL 全部搞定。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%230F1820%27/%3E%3Cpath d=%27M7 17h6l3-7 3 14 3-7h3%27 stroke=%27%236EA8FF%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#F1F3F5; --panel:#FFFFFF; --ink:#0F1820; --slate:#5A6874; --line:#D6DDE3;
+  --signal:#1D4ED8; --signal-ink:#12348F; --live:#0E6B52; --warm:#B0551F;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --serif:"Songti SC","Noto Serif CJK SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
+  --r:2px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.shell{max-width:1180px;margin:0 auto;padding:0 18px}
+
+/* ---------- 顶栏 ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(241,243,245,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .shell{display:flex;align-items:center;gap:14px;height:56px}
+.brand{display:flex;align-items:baseline;gap:8px;text-decoration:none;flex-shrink:0}
+.brand b{font-family:var(--serif);font-size:19px;letter-spacing:.5px;font-weight:600}
+.brand span{font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.06em}
+.topnav{display:none}
+.top .cta{margin-left:auto;display:flex;align-items:center;gap:8px}
+.copybtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  font-family:var(--mono);font-size:12px;padding:7px 11px;border-radius:var(--r);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.copybtn:hover{border-color:var(--signal);color:var(--signal)}
+.copybtn svg{width:13px;height:13px}
+
+/* ---------- Hero ---------- */
+.hero{padding:52px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--slate);
+  display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.eyebrow i{display:block;width:26px;height:1px;background:var(--line)}
+h1{font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.22;margin:0 0 14px;
+  letter-spacing:-.01em;max-width:15em}
+h1 em{font-style:normal;color:var(--signal);position:relative}
+.lede{color:var(--slate);max-width:34em;margin:0 0 26px;font-size:15px}
+.lede b{color:var(--ink);font-weight:600}
+.term{background:var(--ink);border-radius:var(--r);padding:16px 16px 14px;color:#E8EDF2;
+  font-family:var(--mono);font-size:12.5px;line-height:1.9;overflow-x:auto;position:relative}
+.term .dots{display:flex;gap:5px;margin-bottom:10px}
+.term .dots s{width:7px;height:7px;border-radius:50%;background:#3B4854;display:block}
+.term b{color:#8FD3C1;font-weight:400}
+.term u{color:#E8C58A;text-decoration:none}
+.stat{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:26px}
+.stat div{background:var(--panel);padding:14px 14px 12px}
+.stat strong{font-family:var(--mono);font-size:22px;display:block;letter-spacing:-.02em}
+.stat span{font-size:12px;color:var(--slate)}
+
+/* ---------- 区块标题 ---------- */
+.sec{padding:38px 0 6px}
+.sec-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);
+  padding-bottom:12px;margin-bottom:22px}
+.sec-h h2{font-family:var(--serif);font-size:22px;margin:0;font-weight:600}
+.sec-h p{color:var(--slate);font-size:13px;margin:0}
+
+/* ---------- 选型 ---------- */
+.advisor{background:var(--panel);border:1px solid var(--line);padding:18px;border-radius:var(--r)}
+.ad-field{margin-bottom:16px}
+.ad-field>label{display:block;font-size:12.5px;color:var(--slate);margin-bottom:8px;
+  font-family:var(--mono);letter-spacing:.02em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:var(--r);
+  padding:9px 13px;font-size:13.5px;cursor:pointer;min-height:40px;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.adv-out{border-top:1px solid var(--line);padding-top:16px}
+.adv-out .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--slate)}
+.adv-out .pick{font-family:var(--serif);font-size:20px;margin:6px 0 4px;font-weight:600}
+.adv-out .why{color:var(--slate);font-size:13.5px;margin:0 0 12px}
+.adv-links{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- 索引 ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
+.search{flex:1 1 220px;min-width:0;position:relative}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--slate)}
+.search input{width:100%;border:1px solid var(--line);background:var(--panel);
+  border-radius:var(--r);padding:11px 12px 11px 34px;font-size:15px;color:var(--ink);
+  font-family:var(--sans);min-height:44px}
+.search input::placeholder{color:#93A1AD}
+.count{font-family:var(--mono);font-size:12px;color:var(--slate);margin-left:auto}
+
+.group{border-top:1px solid var(--line);margin-top:26px}
+.group-h{display:flex;align-items:baseline;gap:10px;padding:14px 0 10px}
+.group-h h3{font-family:var(--serif);font-size:17px;margin:0;font-weight:600}
+.group-h span{font-size:12px;color:var(--slate)}
+.group-h em{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--slate);
+  font-style:normal}
+
+.row{border-top:1px solid #E4E9ED;background:transparent}
+.row:last-child{border-bottom:1px solid #E4E9ED}
+.row-h{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:14px 0;cursor:pointer;
+  align-items:start}
+.row-h .nm{font-family:var(--mono);font-size:14.5px;font-weight:600;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.row-h .nm i{font-style:normal;font-size:10.5px;letter-spacing:.05em;padding:2px 6px;
+  border:1px solid var(--line);color:var(--slate);border-radius:var(--r);font-weight:400}
+.row-h .nm i.img{border-color:#C7D3F5;color:var(--signal)}
+.row-h .nm i.vid{border-color:#E4D3BF;color:var(--warm)}
+.row-h .tl{grid-column:1/-1;color:var(--slate);font-size:13.5px;line-height:1.7;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row-h .sp{font-family:var(--mono);font-size:11.5px;color:var(--slate);white-space:nowrap;
+  text-align:right;align-self:center}
+.row-h .chev{width:16px;height:16px;color:var(--slate);transition:transform .18s ease;
+  margin-left:auto}
+.row[aria-expanded="true"] .chev{transform:rotate(90deg);color:var(--signal)}
+.row[aria-expanded="true"] .tl{-webkit-line-clamp:unset;display:block}
+.detail{display:none;padding:4px 0 20px;border-top:1px dashed #E0E6EB}
+.row[aria-expanded="true"] .detail{display:block}
+.detail .grid{display:grid;gap:18px}
+.detail h4{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--slate);
+  margin:14px 0 8px;font-weight:500}
+.detail ul{margin:0;padding-left:18px}
+.detail li{font-size:13.5px;line-height:1.8;margin-bottom:4px}
+.detail table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px}
+.detail col.c1{width:34%}
+.detail td{border-bottom:1px solid #EDF1F4;padding:7px 0;vertical-align:top;word-break:break-word}
+.detail td:first-child{color:var(--slate);padding-right:10px}
+.linkbtn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  border:1px solid var(--line);padding:8px 12px;border-radius:var(--r);font-size:13px;
+  font-family:var(--mono);background:var(--panel);min-height:40px;cursor:pointer;color:var(--ink)}
+.linkbtn:hover{border-color:var(--signal);color:var(--signal)}
+.empty{padding:40px 0;text-align:center;color:var(--slate);font-size:14px}
+
+/* ---------- 代码 ---------- */
+.code-wrap{display:grid;gap:14px}
+.code{background:var(--ink);border-radius:var(--r);overflow:hidden}
+.code-h{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #26323D}
+.code-h b{font-family:var(--mono);font-size:11.5px;color:#9FB0BE;font-weight:400;letter-spacing:.04em}
+.code-h .mini{margin-left:auto;background:none;border:1px solid #3B4854;color:#C9D5DF;
+  font-family:var(--mono);font-size:11px;padding:5px 9px;border-radius:var(--r);cursor:pointer}
+.code pre{margin:0;padding:14px;overflow-x:auto;color:#DDE6EE;font-family:var(--mono);
+  font-size:12.5px;line-height:1.85}
+.code pre .c{color:#7E8E9C}
+.code pre .s{color:#93D3B6}
+.code pre .k{color:#E8C58A}
+
+/* ---------- FAQ ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.faq summary{cursor:pointer;font-size:14.5px;list-style:none;display:flex;gap:10px;
+  align-items:flex-start;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"＋";font-family:var(--mono);color:var(--signal);flex-shrink:0}
+.faq details[open] summary::before{content:"－"}
+.faq p{color:var(--slate);font-size:13.5px;margin:8px 0 0 22px;max-width:40em}
+
+/* ---------- 页脚 ---------- */
+footer{margin-top:48px;border-top:1px solid var(--line);padding:28px 0 46px}
+.kw{font-size:12px;color:var(--slate);line-height:2;max-width:60em}
+.kw b{color:var(--ink);font-weight:500;display:block;margin-bottom:6px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.08em}
+.foot-b{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:20px;
+  font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+.foot-b a{color:var(--signal);text-decoration:none}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;transform:translate(-50%,12px);bottom:26px;background:var(--ink);
+  color:#fff;font-size:13px;padding:10px 16px;border-radius:var(--r);opacity:0;
+  pointer-events:none;transition:opacity .18s,transform .18s;z-index:40}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (min-width:768px){
+  .shell{padding:0 28px}
+  .topnav{display:flex;gap:22px;margin-left:26px}
+  .topnav a{font-size:13px;color:var(--slate);text-decoration:none;padding:4px 0}
+  .topnav a:hover{color:var(--ink)}
+  h1{font-size:52px}
+  .hero{padding:64px 0 40px}
+  .stat{grid-template-columns:repeat(4,1fr)}
+  .row-h{grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr) auto 18px;gap:16px;
+    align-items:center;padding:13px 0}
+  .row-h .tl{grid-column:auto;-webkit-line-clamp:2}
+  .row-h .sp{text-align:right}
+  .detail .grid{grid-template-columns:1fr 1fr}
+  .code-wrap{grid-template-columns:1fr 1fr}
+  .advisor{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .adv-out{border-top:none;border-left:1px solid var(--line);padding:0 0 0 24px;
+    display:flex;flex-direction:column;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style></head><body>
+<header class="top"><div class="shell">
+<a class="brand" href="#top"><b>CatRouter</b><span>MODEL INDEX</span></a>
+<nav class="topnav"><a href="#models">模型索引</a><a href="#select">选型助手</a><a href="#start">接入</a><a href="#faq">问答</a></nav>
+<div class="cta"><button class="copybtn" data-copy="https://catrouter.net/v1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5h10"/></svg>复制 BaseURL</button></div>
+</div></header>
+<main id="top"><section class="hero"><div class="shell">
+<div class="eyebrow"><i></i>2026 年 11 月 · 模型版本全同步</div>
+<h1>把 28 个前沿模型，<br>收进 <em>一个 BaseURL</em>。</h1>
+<p class="lede">Claude 5.5 全系、GPT-6.1 Sol、Gemini 3.8 Flash、Grok 4.7、DeepSeek V4、Kimi K3、GLM-5.3、Seedance 2.5 —— 版本、参数、跑分、定价一次看清。改一行 <b>base_url</b> 就能切换，不用梯子，不用海外卡，按量计费。</p>
+<div class="term"><div class="dots"><s></s><s></s><s></s></div><div><u>$</u> curl https://catrouter.net/v1/chat/completions \</div><div>&nbsp;&nbsp;-H <b>"Authorization: Bearer sk-..."</b> \</div><div>&nbsp;&nbsp;-d <b>'{"model":"claude-opus-5-5","messages":[{"role":"user","content":"hi"}]}'</b></div></div>
+<div class="stat"><div><strong>28</strong><span>已收录模型</span></div><div><strong>6</strong><span>厂商与模态分组</span></div><div><strong>1</strong><span>统一 BaseURL</span></div><div><strong>500+</strong><span>平台池内模型</span></div></div>
+</div></section>
+<section class="sec" id="select"><div class="shell">
+<div class="sec-h"><h2>选型助手</h2><p>说清你要做什么，直接给出一个可用的模型名</p></div>
+<div class="advisor"><div>
+<div class="ad-field"><label>任务类型</label><div class="chips" data-ad="task">
+<button class="chip" data-val="coding" aria-pressed="false">写代码 / 改代码</button>
+<button class="chip" data-val="longctx" aria-pressed="false">长文档 / 大仓库</button>
+<button class="chip" data-val="reasoning" aria-pressed="false">高难推理</button>
+<button class="chip" data-val="agent" aria-pressed="false">长跑 Agent</button>
+<button class="chip" data-val="image" aria-pressed="false">出图 / 改图</button>
+<button class="chip" data-val="video" aria-pressed="false">出视频</button>
+</div></div>
+<div class="ad-field"><label>预算取向</label><div class="chips" data-ad="budget">
+<button class="chip" data-val="cheap" aria-pressed="false">能省就省</button>
+<button class="chip" data-val="balanced" aria-pressed="false">性能优先</button>
+<button class="chip" data-val="max" aria-pressed="false">不计成本</button>
+</div></div></div>
+<div class="adv-out"><div class="k">推荐</div><div class="pick" id="advPick">先选一个任务类型</div><p class="why" id="advWhy">选择后这里会给出理由、上手要点和对应仓库。</p><div class="adv-links" id="advLinks"></div></div>
+</div></div></section>
+<section class="sec" id="models"><div class="shell">
+<div class="sec-h"><h2>模型索引</h2><p>点开任意一行，看参数、亮点与接入仓库</p></div>
+<div class="toolbar"><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg><input id="q" type="search" placeholder="搜模型名、厂商或关键词，例如「视频」「Opus」" aria-label="搜索模型"></div><div class="count" id="count"></div></div>
+<div class="toolbar"><div class="chips" data-filter="kind">
+<button class="chip" data-val="all" aria-pressed="true">全部</button>
+<button class="chip" data-val="text" aria-pressed="false">文本</button>
+<button class="chip" data-val="image" aria-pressed="false">图像</button>
+<button class="chip" data-val="video" aria-pressed="false">视频</button>
+</div></div>
+<div id="index"></div></section>
+<section class="sec" id="start"><div class="shell">
+<div class="sec-h"><h2>两段代码就接上</h2><p>OpenAI 兼容协议与 Anthropic 原生 SDK 都走同一个域名</p></div>
+<div class="code-wrap">
+<div class="code"><div class="code-h"><b>python · openai sdk</b><button class="mini" data-copy="from openai import OpenAI\n\nclient = OpenAI(api_key=\"sk-你的中转Key\", base_url=\"https://catrouter.net/v1\")\n\nresp = client.chat.completions.create(\n    model=\"claude-opus-5-5\",\n    messages=[{\"role\": \"user\", \"content\": \"你好\"}],\n)\nprint(resp.choices[0].message.content)">复制</button></div><pre>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    api_key=<span class="s">"sk-你的中转Key"</span>,
+    base_url=<span class="s">"https://catrouter.net/v1"</span>,
+)
+
+resp = client.chat.completions.create(
+    model=<span class="s">"claude-opus-5-5"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"你好"</span>}],
+)
+<span class="c"># 换模型只改 model= 这一行</span></pre></div>
+<div class="code"><div class="code-h"><b>bash · curl</b><button class="mini" data-copy="curl https://catrouter.net/v1/chat/completions -H \"Authorization: Bearer sk-你的中转Key\" -H \"Content-Type: application/json\" -d '{\"model\":\"gpt-6.1-sol\",\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}'">复制</button></div><pre>
+<span class="k">curl</span> https://catrouter.net/v1/chat/completions \
+  -H <span class="s">"Authorization: Bearer sk-你的中转Key"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{"model":"gpt-6.1-sol",
+       "messages":[{"role":"user","content":"hi"}]}'</span></pre></div>
+</div></div></section>
+<section class="sec" id="faq"><div class="shell">
+<div class="sec-h"><h2>三个最常问的</h2><p>其余问题在各自仓库的 README 里</p></div>
+<div class="faq">
+<details><summary>中转站会不会改我的请求内容？</summary><p>不会。中转只做转发与鉴权，请求参数、thinking block、tool use 都按上游规格透传；返回也是原始响应结构。</p></details>
+<details><summary>为什么同一段文字 token 变多了？</summary><p>Claude 4.7 之后换了新分词器，官方提示同样文本约多 30% token。做成本测算时不能直接沿用旧版的「字符 × 单价」。</p></details>
+<details><summary>这么多模型，我该从哪个开始？</summary><p>先看上面的选型助手。默认建议：主力工作用 claude-opus-5-5 或 gpt-6.1-sol，批量与高并发切 haiku-5-5 / v4-flash，出图用 gpt-image-2.6，出视频用 sd-2-5-480p 试稿。</p></details>
+</div></div></section>
+<footer><div class="shell">
+<div class="kw"><b>长尾关键词</b>AI 中转站、API 中转平台、大模型聚合中转、国内直连免魔法、可试用免费额度、稳定靠谱好用、低延迟高并发、按量计费便宜、OpenAI 兼容接口、Claude 原生 SDK、GPT-6.1 中转、Claude Opus 5.5 中转、Gemini 3.8 Flash 中转、Grok 4.7 中转、DeepSeek V4 中转、Kimi K3 中转、GLM-5.3 中转、Nano Banana 2.1 中转、Seedance 2.5 中转、MiniMax H3 中转、GPT-Image-2.6 中转、500+ 模型一键切换。</div>
+<div class="foot-b"><span>© 2026 CatRouter</span><a href="https://catrouter.net">https://catrouter.net</a><a href="https://github.com/catrouter-net/catrouter-net">GitHub 仓库总览</a><span>页面为单文件静态页，数据截至 2026-11-08</span></div>
+</div></footer></main>
+<div class="toast" id="toast">已复制</div>
+<script>
+const GROUPS = [{"id": "anthropic", "name": "Anthropic Claude", "desc": "Claude 5 家族与存量版本，长上下文与 Agent 是其主场", "models": [{"slug": "claude-opus-5-5", "name": "Claude Opus 5.5", "vendor": "Anthropic", "released": "2026年7月24日", "tagline": "Opus 5.5 在绝大多数工作上已达到 Claude Fable 5.1 的水平，运行成本却比 Opus 5 低约 40%，是当前 Claude 家族里性价比最高的旗舰。", "spec": "上下文窗口 100 万 token", "kind": "text", "facts": ["能力定位：Opus 5.5 是 Opus 5 的迭代版本，官方给出的结论是“在大多数工作负载上达到 Fable 5.1 水平、成本低 40%”，因此它非常适合替代高价旗舰跑日常主力任务。", "长任务智能体：擅长连续数小时的自主编码智能体、大规模重构、复杂系统工程、多轮视觉工作流与 computer use 场景。", "上下文规格：100 万 token 超长窗口 + 12.8 万 token 单次输出，整站源码、几百页合同、整套论文可以一次性喂进去做交叉分析。", "迁移注意：相比 Opus 5 有 4 项破坏性变更——思考不可关闭、强制工具调用会报错、thinking block 与模型及会话绑定、部分 computer use 工具版本不再支持，接入时要同步改代码。"], "params": [["上下文窗口", "100 万 token"], ["最大输出", "12.8 万 token（Batch API 300 万以内）"], ["思考模式", "自适应思考，常开不可关闭，默认 effort = medium"], ["输入/输出", "文本+图像 → 文本"], ["知识截止", "2026 年 6 月"], ["发布节奏", "2026 年 7 月 24 日正式发布"]], "scenes": ["长周期编码智能体：让它连续跑数小时的仓库级重构与缺陷修复。", "超长文档分析：百万 token 级别合同、招股书、审计底稿一次性交叉比对。", "企业知识工作：财务建模、法律文书梳理、Excel / PPT 批量处理。", "多模态理解：截图排障、界面走查、图纸与表格识别。"], "repo": "https://github.com/catrouter-net/claude-opus-5-5", "tags": ["agent", "longctx", "coding"]}, {"slug": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "vendor": "Anthropic", "released": "2026年9月28日", "tagline": "速度与智能最均衡的一档：Terminal-Bench 4.0 从 Sonnet 5 的 10.3% 直接拉到 70.6%，价格却仍在中端区间。", "spec": "定位 Claude 5.5 家族的速度/成本均衡款", "kind": "text", "facts": ["能力跃迁：Sonnet 5.5 相对 Sonnet 5 在终端智能体任务上提升近 7 倍（70.6% vs 10.3%），首次让中端模型具备真正可用的长程 Agent 能力。", "成本结构：延续 Sonnet 家族的定价区间，适合大批量、高并发、对延迟敏感的线上业务，是替换 Haiku 与 Opus 之间的最佳中间档。", "迁移注意：官方列出 5 项破坏性变更，涉及预思考禁用参数、强制工具调用、thinking block 归属等，旧代码上线前需要过一遍兼容清单。", "多模态：支持文本与图像输入、多语言、视觉、工具调用，与 Opus 5.5 保持同一套 API 形态。"], "params": [["定位", "Claude 5.5 家族的速度/成本均衡款"], ["上下文窗口", "100 万 token"], ["最大输出", "12.8 万 token"], ["思考模式", "自适应思考 + effort 参数可调"], ["典型跑分", "Terminal-Bench 4.0 = 70.6%（Sonnet 5 为 10.3%）"], ["发布时间", "2026 年 9 月 28 日"]], "scenes": ["线上客服与智能问答的高并发推理。", "CI/CD 里的自动代码审查、单测生成与修复建议。", "日常知识工作：文档总结、会议纪要、结构化抽取。", "中长程 Agent：多步骤工具调用与任务编排。"], "repo": "https://github.com/catrouter-net/claude-sonnet-5-5", "tags": ["coding", "agent", "balanced"]}, {"slug": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "vendor": "Anthropic", "released": "2026年10月7日", "tagline": "5.5 家族里最快、最省的一档，专为高并发、成本敏感型业务准备，同样给到 100 万 token 上下文。", "spec": "定位 Claude 5.5 家族最轻量款", "kind": "text", "facts": ["速度优先：Haiku 5.5 是 5.5 家族里延迟最低的型号，适合大批量分类、抽取、翻译、审核等高频调用场景。", "能力补齐：相较 Haiku 4.5，对齐评测大幅改善，错位行为更少；同时把 1M 上下文与自适应思考下放到轻量档。", "成本陷阱提示：新分词器让相同文本约多算 30% token，做成本测算时不能直接沿用 Haiku 4.5 的单价 × 字符数。", "安全策略：网络安全相关防护比 Haiku 4.5 更严格，涉及漏洞分析类请求要预留降级路径。"], "params": [["定位", "Claude 5.5 家族最轻量款"], ["上下文窗口", "100 万 token"], ["最大输出", "12.8 万 token"], ["思考模式", "自适应思考 + effort 参数"], ["计费注意", "沿用 4.7 之后的新分词器，同样文字约多 30% token"], ["发布时间", "2026 年 10 月 7 日"]], "scenes": ["批量内容审核与标签分类。", "长文档摘要、翻译与字段抽取。", "RAG 检索结果的轻量重排与改写。", "Agent 里的“小脑”环节：规划拆解、简单工具调用。"], "repo": "https://github.com/catrouter-net/claude-haiku-5-5", "tags": ["cheap", "batch", "fast"]}, {"slug": "claude-fable-5", "name": "Claude Fable 5", "vendor": "Anthropic", "released": "2026年6月9日", "tagline": "Mythos 级别的能力，Anthropic 面向公众开放的最强型号，任务越长越复杂，领先幅度越大。", "spec": "上下文窗口 100 万 token", "kind": "text", "facts": ["天花板能力：官方称 Fable 5 在几乎所有测试过的能力基准上处于 SOTA，软件工程、知识工作、视觉、科研领域全面领先。", "长程优势：任务越长、越复杂，Fable 5 相对其他模型的领先幅度越大，适合“跑一整天”的 Agent 工作流。", "安全分类器：与 Mythos 5 同权重，但额外加了网络安全与生物领域的滥用防护，被拒答时要做降级处理而不是死循环重试。", "选型建议：官方明确建议先用 Opus 5.5，只有在高 effort 下评测仍不达标时才上 Fable 5.1 / Fable 5。"], "params": [["层级", "Mythos-class，能力位于 Opus 之上"], ["上下文窗口", "100 万 token"], ["输出", "支持超长单次输出（与 Opus 5.5 同级规格）"], ["特殊机制", "内置安全分类器，可能拒绝部分请求"], ["同源型号", "Claude Mythos 5（仅限 Glasswing 计划内的受审机构）"], ["发布时间", "2026 年 6 月 9 日"]], "scenes": ["超长程自主 Agent：一次跑完整个项目模块。", "前沿科研：论文复现、实验设计、数据分析全链路。", "复杂系统排障与安全审计（注意合规边界）。", "高难度推理：多约束规划、金融与法律深度分析。"], "repo": "https://github.com/catrouter-net/claude-fable-5", "tags": ["reasoning", "agent", "longctx"]}, {"slug": "claude-opus-4-8", "name": "Claude Opus 4.8", "vendor": "Anthropic", "released": "2026年5月28日", "tagline": "Opus 4.7 之后仅隔 41 天的大版本，把“代码诚实度”和长周期自主运行做实，至今仍是大量存量项目的稳定主力。", "spec": "上下文窗口 100 万 token（测试版）", "kind": "text", "facts": ["代码诚实度：代码缺陷漏判概率较 4.7 降低约 4 倍，遇到不确定内容会主动标注风险，不再硬编一个错误结论。", "长周期 Agent：Dynamic Workflows 支持拆分复杂任务、组建并行子代理，配合上下文自动压缩，显著延长自主任务运行时长。", "办公落地：Claude in Excel、Claude in PowerPoint 预览版可直接批量处理表格与版式化演示文稿。", "版本演进：4.8 → Opus 5 → Opus 5.5 已连续迭代，4.8 的提示词体系与评测基线仍可平移到 5.5，迁移成本低。"], "params": [["上下文窗口", "100 万 token（测试版）"], ["最大输出", "12.8 万 token"], ["跑分", "SWE-bench Pro 69.2%、Terminal-Bench 2.1 74.6%、MRCR v2 76%"], ["商业评测", "GDPval-AA Elo 1890，领先 GPT-5.5 121 分"], ["推理", "无工具 HLE 49.8%，挂工具 57.9%"], ["发布时间", "2026 年 5 月 28 日"]], "scenes": ["大型代码库审查与重构。", "长周期自主运维、终端操控。", "金融建模、法律文书、审计底稿处理。", "多智能体协同的复杂业务编排。"], "repo": "https://github.com/catrouter-net/claude-opus-4-8", "tags": ["coding", "agent", "legacy"]}]}, {"id": "openai-text", "name": "OpenAI GPT", "desc": "六代 / 五代主力，从性价比到最高能力档", "models": [{"slug": "gpt-6.1-sol", "name": "GPT-6.1 Sol", "vendor": "OpenAI", "released": "2026年9月29日", "tagline": "OpenAI 当前最新旗舰：105 万 token 上下文、13 万 token 输出，输入 $2 / 输出 $10 每百万 token，是六代家族里最值得放量的一档。", "spec": "上下文窗口 105 万 token", "kind": "text", "facts": ["代际位置：GPT-6 家族在 9 月快速补齐 Sol / Luna 双线，GPT-6.1 Sol 是 9 月 29 日的最新迭代，官方把它作为 6.1 的旗舰主推。", "价格结构罕见：相比 GPT-6 Astra 的 $10/$50，6.1 Sol 的 $2/$10 直接把六代旗舰的成本压到五代水平，适合大规模放量。", "上下文：105 万 token 窗口，可整包喂入中型代码仓、全年财报、上百份合同做跨文件推理。", "工具链：原生支持网页搜索、文件搜索、代码编写与执行，做 Agent 时不必额外自建检索层。"], "params": [["上下文窗口", "105 万 token"], ["最大输出", "13 万 token"], ["价格", "输入 $2.00 / 百万 token，输出 $10.00 / 百万 token"], ["知识截止", "2026 年 4 月 30 日"], ["能力", "文本+图像输入、网页搜索、文件搜索、代码编写与执行"], ["发布时间", "2026 年 9 月 29 日"]], "scenes": ["大规模 RAG 与长文档问答。", "Agent 编排：搜索 + 代码执行 + 文件处理全链路。", "企业知识库、合规审查、投标文件比对。", "高并发 C 端产品的对话与推理。"], "repo": "https://github.com/catrouter-net/gpt-6.1-sol", "tags": ["balanced", "longctx", "agent"]}, {"slug": "gpt-6-sol", "name": "GPT-6 Sol", "vendor": "OpenAI", "released": "2026年9月22日", "tagline": "GPT-6 家族的主力型号，发布后直接接替 GPT-5.6 Sol 成为 ChatGPT 的默认六代模型。", "spec": "上下文窗口 105 万 token 级别", "kind": "text", "facts": ["接替关系：GPT-6 Sol 与 GPT-6 Luna 一起把 GPT-5.6 Sol / Luna 从 ChatGPT 主线替换下来，是六代的“标配”模型。", "能力取向：相比 Astra 的“最强最对齐”，Sol 更强调智能、速度、成本三者平衡，适合日常主力工作负载。", "生态一致：与 6.1 Sol 共用同一套 API 形态与工具能力，迁移只需改模型名。", "预训练数据：六代模型的知识覆盖延伸到 2026 年上半年，时事类问题不必频繁外挂检索。"], "params": [["家族", "GPT-6（Astra / Sol / Luna 三线）"], ["上下文窗口", "105 万 token 级别"], ["输出", "12.8 万 token 级别"], ["定位", "六代主力，兼顾能力与成本"], ["发布时间", "2026 年 9 月 22 日（家族扩展）"]], "scenes": ["通用办公与知识工作主力。", "内容生产、翻译、技术写作。", "中等复杂度 Agent 与工具调用。", "长上下文文档处理。"], "repo": "https://github.com/catrouter-net/gpt-6-sol", "tags": ["balanced", "agent"]}, {"slug": "gpt-6-astra", "name": "GPT-6 Astra", "vendor": "OpenAI", "released": "2026年9月4日", "tagline": "六代首个发布的型号，官方定位“最智能、最对齐”，105 万 token 上下文 + 五档推理强度。", "spec": "上下文窗口 105 万 token", "kind": "text", "facts": ["六代开篇：GPT-6 Astra 是 GPT-6 系列首个落地的模型，Agent 能力被行业点评为“跃迁级”提升。", "推理旋钮：五档 reasoning effort 让人能在“深度思考”和“省钱快出”之间自由切换，同一模型既能做难题也能做日常。", "价格分层：短上下文输入 $10 / 输出 $50，长上下文另有溢价规则，做成本模型时要把上下文长度纳入公式。", "对齐取向：强调“最对齐”，高风险请求拒答更果断，业务侧需要准备兜底话术与降级链路。"], "params": [["上下文窗口", "105 万 token"], ["最大输出", "12.8 万 token"], ["价格", "输入 $10 / 百万 token，输出 $50 / 百万 token"], ["推理强度", "Low / Medium / High / Very High / Max 五档"], ["能力", "文本+图像输入，网页搜索、文件搜索、代码编写与执行"], ["发布时间", "2026 年 9 月 4 日"]], "scenes": ["最高难度的推理与规划任务。", "复杂编码 Agent 与系统设计。", "科研、金融、法律等高价值分析。", "对输出可靠性要求极高的对外场景。"], "repo": "https://github.com/catrouter-net/gpt-6-astra", "tags": ["reasoning", "longctx", "agent"]}, {"slug": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "vendor": "OpenAI", "released": "2026年7月9日", "tagline": "五代收官之作：在编程、知识工作、网络安全与科学领域全面达到前沿水平，且用更少 token、更低成本完成同样的活。", "spec": "上下文窗口 百万级 token", "kind": "text", "facts": ["旗舰定位：GPT-5.6 Sol 在编程、知识型工作、网络安全、科学领域都拿到行业前沿成绩，且官方强调“更少 token、更低预估成本”。", "设计能力：5.6 在界面设计上有明显跃迁，只给方向性提示就能产出可用、美观的 UI，并能反过来检查渲染结果。", "缓存机制：任务框架把模型可见的记录设为只能末尾追加，保证提示词缓存前缀完全一致，长任务成本显著下降。", "生态成熟：五代模型在 Codex、ChatGPT Work、API 三端均已稳定，是存量项目最省心的选择。"], "params": [["家族", "GPT-5.6（Sol 旗舰 / Terra 均衡 / Luna 性价比）"], ["上下文窗口", "百万级 token"], ["输出", "支持长输出任务"], ["价格", "Sol 高于 Terra，但比 GPT-6 系列低"], ["特性", "提示词缓存只追加前缀，长任务可复用计算"], ["发布时间", "2026年6月26日预览 / 7月9日正式"]], "scenes": ["复杂编码与工程交付。", "UI/前端设计与视觉走查。", "科研与数据分析。", "企业知识工作流水线。"], "repo": "https://github.com/catrouter-net/gpt-5.6-sol", "tags": ["coding", "reasoning"]}, {"slug": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "vendor": "OpenAI", "released": "2026年7月9日", "tagline": "性能对标 GPT-5.5，价格只要一半——GPT-5.6 家族里最值得当“日常主力”的均衡款。", "spec": "定位 GPT-5.6 均衡款，日常办公主力", "kind": "text", "facts": ["性价比拐点：官方明确 Terra 具备与 GPT-5.5 竞争的性能，成本却只有一半，是把存量 GPT-5.5 业务降本的首选。", "适用面：日常写作、总结、翻译、结构化抽取、中等复杂度编码，都属于 Terra 的舒适区。", "生态限制：标准 ChatGPT 对话里不直接选 Terra，需要在 Work、Codex 或 API 侧调用——这也正是中转平台的价值点。", "迁移成本：与 Sol 共用同一套 API 与工具定义，切换只改模型名。"], "params": [["定位", "GPT-5.6 均衡款，日常办公主力"], ["能力对标", "与 GPT-5.5 持平"], ["价格", "约为 GPT-5.5 的一半"], ["家族", "Sol 旗舰 / Terra 均衡 / Luna 极致性价比"], ["发布时间", "2026年7月9日"]], "scenes": ["日常文案、总结、翻译。", "中等复杂度编码与 Review。", "客服与内部知识问答。", "批量结构化数据抽取。"], "repo": "https://github.com/catrouter-net/gpt-5.6-terra", "tags": ["cheap", "balanced", "batch"]}, {"slug": "gpt-5.5", "name": "GPT-5.5", "vendor": "OpenAI", "released": "2026年4月23日", "tagline": "百万 token 上下文、$5/$30 每百万 token 的五代主力，至今仍是大量生产系统的默认模型。", "spec": "上下文窗口 100 万 token", "kind": "text", "facts": ["五代主力：GPT-5.5 是 2026 年上半年使用最广的旗舰，提示词体系、评测基线、工具生态都最成熟。", "价格选项多：标准 / Fast / Batch / Flex 四种计费形态，可按业务时效性自由组合，批处理场景成本能砍一半。", "上下文差异：API 侧 100 万 token，Codex 侧 40 万 token，做长代码任务时要注意入口不同、窗口不同。", "Fast 模式取舍：1.5 倍速度换 2.5 倍成本，只适合交互式强实时场景。"], "params": [["上下文窗口", "100 万 token"], ["价格", "输入 $5 / 百万 token，输出 $30 / 百万 token"], ["Fast 模式", "速度 1.5 倍，成本 2.5 倍"], ["Codex 场景", "40 万 token 上下文"], ["批量优惠", "Batch / Flex 按标准价五折"], ["发布时间", "2026 年 4 月 23 日"]], "scenes": ["生产环境通用推理。", "批量离线任务（Batch 五折）。", "Codex 编码工作流。", "长文档与知识库问答。"], "repo": "https://github.com/catrouter-net/gpt-5.5", "tags": ["batch", "balanced", "legacy"]}, {"slug": "gpt-5.4", "name": "GPT-5.4", "vendor": "OpenAI", "released": "2026年上半年", "tagline": "GPT-5 家族里兼容性最好、提示词最稳的一档，很多存量业务至今仍跑在 5.4 上。", "spec": "定位 GPT-5 家族成熟稳定版本", "kind": "text", "facts": ["稳定性优先：5.4 的提示词行为与工具调用格式在大量生产系统中被长期验证，是“不求最强、只求不炸”的选项。", "成本基线：作为五代中前段版本，单价低于 5.5 / 5.6 Sol，适合对质量要求稳定但预算有限的长尾业务。", "迁移友好：与 5.5 共用 OpenAI 兼容协议，横向对比只需改模型名，便于做降本实验。", "风险提示：部分新能力（如 Fast 模式、超长输出）在 5.4 上不可用，功能规划时要确认版本边界。"], "params": [["定位", "GPT-5 家族成熟稳定版本"], ["上下文窗口", "百万 token 级"], ["生态", "OpenAI 兼容协议全覆盖"], ["特点", "历史提示词与工具定义兼容性最好"], ["建议", "新项目上 5.5/5.6，存量项目可保留 5.4 做灰度"]], "scenes": ["已上线多年的存量业务。", "提示词体系固化、不宜大改的内部系统。", "成本敏感的规模化调用。", "与 5.5 做 A/B 降本对照。"], "repo": "https://github.com/catrouter-net/gpt-5.4", "tags": ["legacy", "cheap", "batch"]}]}, {"id": "google-xai", "name": "Google 与 xAI", "desc": "Gemini 的效率流与 Grok 的长任务派", "models": [{"slug": "gemini-3.8-flash", "name": "Gemini 3.8 Flash", "vendor": "Google", "released": "2026年9月2日", "tagline": "六周内第三次 Flash 迭代：DeepSWE v1.1 从 65.3% 涨到 73.7%，距离 Opus 5 只差 0.3 个百分点，价格仍是 Flash 档。", "spec": "Gemini 3.8 Flash / 3.8 Flash Cyber 双变体", "kind": "text", "facts": ["越级表现：3.8 Flash 在长程软件工程基准 DeepSWE v1.1 上超过多数更大的前沿模型，Terminal-Bench 2.1 同步提升。", "工作方式：官方称其“更肯干”——复杂任务会主动多走几步推理、反复调用工具直到拿到结果，而不是草草收尾。", "成本结构：维持 3.7 Flash 的速度与低价，但复杂任务因步数变多，实际账单可能高于以前，需要重算单价。", "双变体：标准 Flash 面向通用，Flash Cyber 面向安全与网络相关任务，接入时按业务选型号。"], "params": [["形态", "Gemini 3.8 Flash / 3.8 Flash Cyber 双变体"], ["DeepSWE v1.1", "73.7%（3.7 Flash 为 65.3%）"], ["对标", "与 Opus 5 的 74.0% 仅差 0.3pt"], ["可调项", "effort 档位可控制质量/成本/延迟配比"], ["输入", "文本、图像等多模态"], ["发布时间", "2026 年 9 月 2 日"]], "scenes": ["长程软件工程 Agent 与自动修复。", "多步推理的专业领域任务（金融、法务）。", "多模态图文理解与内容处理。", "高性价比的批量推理。"], "repo": "https://github.com/catrouter-net/gemini-3.8-flash", "tags": ["coding", "fast", "cheap"]}, {"slug": "grok-4.7", "name": "Grok 4.7", "vendor": "SpaceXAI（xAI）", "released": "2026年9月", "tagline": "换了更大基座、用更长 RL 周期在“数小时级难题”上重训，主打自我检查与超长上下文管理。", "spec": "基座 比 Grok 4.6 更大", "kind": "text", "facts": ["训练取向：官方刻意把训练任务偏向“需要数小时才能完成”的难题，目标是让模型在长任务里少走弯路、少返工。", "自我检查：Grok 4.7 显著强化了 self-verification，会在交付前回看自己的产出，这对 Agent 链路是刚需。", "上下文管理：长时间运行时的上下文压缩与信息保留能力提升，适合连续数小时的工程与知识工作。", "多平台可用：Bedrock、Azure AI Foundry、Cursor 均已上架，企业接入路径清晰，价格被评价为“很有竞争力”。"], "params": [["基座", "比 Grok 4.6 更大"], ["训练", "更长强化学习周期 + 偏难任务混合"], ["强项", "自我验证、长上下文管理、数小时长任务"], ["部署", "已上 Amazon Bedrock、Azure AI Foundry、Cursor"], ["形态", "多模态大语言模型"], ["发布时间", "2026 年 9 月"]], "scenes": ["长时间运行的编码 Agent。", "演示文稿、法律、医疗、工程等专业文档工作。", "需要自我校验的高可靠性任务。", "多步工具编排与长上下文分析。"], "repo": "https://github.com/catrouter-net/grok-4.7", "tags": ["agent", "reasoning"]}, {"slug": "grok-4.5", "name": "Grok 4.5", "vendor": "SpaceXAI（xAI）", "released": "2026年上半年", "tagline": "Grok 家族的性价比位：响应快、价格低，适合高频对话与轻量 Agent。", "spec": "定位 Grok 4 系列性价比版本", "kind": "text", "facts": ["速度优势：Grok 4.5 的响应延迟在同价位模型里表现突出，适合聊天、客服、实时问答这类对首字延迟敏感的场景。", "价格友好：单价明显低于旗舰档，适合把高频、低难度的调用放到 4.5 上跑，难题再升级到 4.7。", "风格特点：回答直接、口语化，对创意写作与社交媒体文案比较友好。", "能力边界：超长程 Agent、复杂工程重构仍建议交给 4.7 或更高档模型。"], "params": [["定位", "Grok 4 系列性价比版本"], ["特点", "低延迟、低单价"], ["能力", "对话、检索、轻量工具调用"], ["建议", "日常高频调用优先，重度 Agent 上 4.7"]], "scenes": ["聊天机器人与客服问答。", "社媒文案、创意短内容。", "轻量检索与总结。", "高频低成本的批处理。"], "repo": "https://github.com/catrouter-net/grok-4.5", "tags": ["fast", "cheap"]}]}, {"id": "opensource", "name": "国产与开源", "desc": "DeepSeek、Kimi、GLM —— 可私有化，也够便宜", "models": [{"slug": "deepseek-v4", "name": "DeepSeek V4", "vendor": "DeepSeek", "released": "2026年4月24日", "tagline": "百万上下文普惠的开源旗舰：MoE 架构 + Token-wise 压缩与 DSA 稀疏注意力，把 1M 上下文做成默认标准。", "spec": "上下文 100 万 token，官方服务默认", "kind": "text", "facts": ["百万上下文普惠：DeepSeek 把 1M 上下文做成官方服务默认，长文档处理不再需要外挂摘要链路。", "结构创新：Token-wise 压缩 + DSA 稀疏注意力，在保持长上下文质量的同时大幅降低算力与显存开销。", "能力定位：Agent 能力、世界知识、推理性能均做到国内与开源领域领先，V4-Pro 官方称胜过所有现有开源模型。", "成本优势：开源 + 高效架构，单位 token 价格显著低于同级闭源旗舰，是规模化部署的性价比选项。"], "params": [["架构", "DeepSeekMoE + 多 Token 预测（MTP）"], ["上下文", "100 万 token，官方服务默认"], ["关键创新", "Token-wise 压缩 + DeepSeek Sparse Attention（DSA）"], ["版本", "V4 / V4-Pro 双档"], ["开源", "预览版同步开源"], ["发布时间", "2026 年 4 月 24 日"]], "scenes": ["超长文档与代码库分析。", "国产化替代与私有化部署。", "Agent 与工具调用工作流。", "大规模低成本的批量推理。"], "repo": "https://github.com/catrouter-net/deepseek-v4", "tags": ["longctx", "cheap", "batch"]}, {"slug": "deepseek-v4-pro-0813", "name": "DeepSeek V4-Pro 0813", "vendor": "DeepSeek", "released": "2026年8月13日", "tagline": "V4-Pro 的 8 月 13 日迭代版本，开源阵营里推理能力的天花板一档。", "spec": "定位 开源最强推理档", "kind": "text", "facts": ["版本含义：0813 是模型迭代日期后缀，代表 8 月 13 日发布的权重组，同一型号名不同后缀效果会有差异，调用时要显式指定。", "推理能力：V4-Pro 官方称在世界知识与推理上超过当时所有开源模型，复杂多步推理是它的主战场。", "长上下文：1M token 上下文 + DSA 稀疏注意力，适合整仓代码审查与超长合同比对。", "成本结构：比闭源旗舰便宜一档，但 Pro 档单价高于 V4 标准档，建议难题才用 Pro。"], "params": [["版本", "V4-Pro，2026-08-13 迭代"], ["架构", "MoE + MTP，1M 上下文"], ["定位", "开源最强推理档"], ["计费", "按 token 按量"], ["特点", "长上下文 + 强推理，Agent 友好"]], "scenes": ["复杂推理与多步规划。", "仓库级代码审查与重构。", "超长合同、财报交叉比对。", "Agent 主脑：任务拆解与结果校验。"], "repo": "https://github.com/catrouter-net/deepseek-v4-pro-0813", "tags": ["reasoning", "longctx"]}, {"slug": "deepseek-v4-flash-0731", "name": "DeepSeek V4-Flash 0731", "vendor": "DeepSeek", "released": "2026年7月31日", "tagline": "V4 家族的轻量快速档（7 月 31 日权重组），低成本跑高并发的首选。", "spec": "定位 轻量 / 快速 / 低单价", "kind": "text", "facts": ["轻量定位：Flash 档用更小的激活规模换取低延迟与低单价，适合把高频模板化任务全部下沉到这里。", "迭代脉络：0731 是 7 月 31 日版本；9 月 10 日的 V4.1 Flash 采用新预训练与更大规模 RL，官方称已超越包括 V4-Pro 在内的一众旗舰。", "能力预期：日常问答、摘要、抽取、分类、简单代码生成都在舒适区，复杂推理仍建议上 Pro。", "版本管理：带日期后缀的模型名要写全，否则容易落到默认权重组，效果与账单都会变。"], "params": [["版本", "V4-Flash，2026-07-31"], ["定位", "轻量 / 快速 / 低单价"], ["后续", "V4.1 Flash 于 9 月 10 日发布，能力进一步上探"], ["架构", "非对称结构，小成本大智能"], ["场景", "批量、高并发、延迟敏感"]], "scenes": ["高频模板化的分类、抽取、摘要任务。", "客服机器人与实时问答。", "批量的文档清洗与格式转换。", "Agent 中的快速决策与轻量工具调用。"], "repo": "https://github.com/catrouter-net/deepseek-v4-flash-0731", "tags": ["cheap", "fast", "batch"]}, {"slug": "kimi-k3", "name": "Kimi K3", "vendor": "月之暗面 Moonshot AI", "released": "2026年7月17日", "tagline": "2.8 万亿参数、104B 激活的 MoE，全球首个开源 3T 级模型，原生视觉 + 100 万 token 上下文。", "spec": "参数 2.8T 总参数 / 104B 激活", "kind": "text", "facts": ["规模突破：K3 参数约为 K2.5 的 3 倍，是全球首个开源的 3T 级模型，在算力不算宽裕的条件下靠架构而不是堆卡实现。", "KDA 机制：Kimi Delta Attention 混合线性注意力 + Attention Residuals，改善跨序列长度与跨深度的信息流。", "原生视觉：不需要外挂视觉编码器，图片理解与长文档版面解析表现更自然。", "长程能力：面向长时间编码、知识工作与推理设计，能把一个 prompt 直接变成可玩的游戏、成套 PPT 与交互式研究报告。"], "params": [["参数", "2.8T 总参数 / 104B 激活"], ["关键技术", "Kimi Delta Attention（KDA）+ Attention Residuals"], ["上下文", "100 万 token"], ["模态", "原生视觉理解"], ["开源", "权重、技术报告与 Infra 技术同步开放"], ["发布时间", "2026 年 7 月 17 日发布 / 7 月 27 日开放"]], "scenes": ["长程编码与工程交付。", "图文混排的知识工作与报告生成。", "超长文档理解与跨文件推理。", "交互式内容生成（游戏、PPT、网页原型）。"], "repo": "https://github.com/catrouter-net/kimi-k3", "tags": ["coding", "longctx", "agent"]}, {"slug": "glm-5.3-flash", "name": "GLM-5.3-Flash", "vendor": "智谱 AI", "released": "2026年8月/9月", "tagline": "GLM-5 系列首个原生多模态模型：320B 总参 / 18B 激活，稀疏+线性注意力混合架构，成本极低。", "spec": "总参数 320B", "kind": "text", "facts": ["混合架构：320B 总参只激活 18B，配合稀疏 + 线性注意力混合，在极低成本下实现超越 GLM-5.2 的智能水平。", "原生多模态：能直接理解图片、视频，自主完成研究分析、文档制作等复杂专业任务，不需要额外的多模态拼装。", "代码生成：可以产出可交互的代码（前端页面、小工具），适合做原型与演示。", "FlashX 加速：FlashX 版本推理速度最高 200 tokens/s，交互体验更流畅，适合实时场景。"], "params": [["总参数", "320B"], ["激活参数", "18B"], ["架构", "稀疏注意力 + 线性注意力混合（开源前沿模型首例）"], ["能力", "原生理解图像与视频，可生成可交互代码"], ["衍生", "GLM-5.3-FlashX 推理速度最高 200 tokens/s"], ["定位", "普惠级前沿模型"]], "scenes": ["图文 / 视频内容理解与审核。", "低成本可交互原型与前端代码生成。", "研究分析与文档自动制作。", "国产化多模态业务落地。"], "repo": "https://github.com/catrouter-net/glm-5.3-flash", "tags": ["cheap", "multimodal", "coding"]}]}, {"id": "image", "name": "图像生成", "desc": "文字渲染、蒙版编辑、矢量与动画输出", "models": [{"slug": "gpt-image-2", "name": "GPT-Image-2", "vendor": "OpenAI", "released": "2026年4月21日", "tagline": "OpenAI 迄今最强的图像生成模型：更强的编辑、版式、文字渲染与指令遵循，还带思考模式。", "spec": "定位 复杂视觉任务的主力生图模型", "kind": "image", "facts": ["能力定位：官方称 gpt-image-2 是目前最强的图像生成模型，面向复杂视觉任务，强调“精确、可直接使用”。", "文字渲染：密集文字、表格、海报文案的还原能力大幅提升，做电商主图与信息图不再需要后期重排。", "思考模式：可先做推理、联网检索、再生成多张候选，把一个模糊需求变成有依据的成套视觉方案。", "编辑能力：局部编辑、版式调整、指令遵循更可靠，适合批量迭代而不是每次重抽。"], "params": [["发布", "2026 年 4 月 21 日（API / Codex 同步可用）"], ["强项", "精确编辑、复杂版式、密集文字渲染"], ["思考模式", "可结合推理与工具、联网检索后出图"], ["定位", "复杂视觉任务的主力生图模型"], ["后续", "GPT-Image-2.5 / 2.6 已迭代上线"]], "scenes": ["电商主图、详情页、商品卡片。", "海报、Banner、社媒配图。", "信息图与图表视觉化。", "带文字的营销素材批量生成。"], "repo": "https://github.com/catrouter-net/gpt-image-2", "tags": ["image"]}, {"slug": "gpt-image-2-d", "name": "GPT-Image-2-d", "vendor": "OpenAI", "released": "2026年", "tagline": "gpt-image-2 的 -d 变体，面向“高细节、可直接交付”的出图需求。", "spec": "定位 高细节 / 直出商用", "kind": "image", "facts": ["后缀含义：-d 是 gpt-image-2 的变体标识，通常对应更偏“细节/直出”的推理配置，具体行为以服务端模型列表为准。", "继承能力：编辑精度、复杂版式、密集文字渲染与指令遵循沿用 2 代基础能力。", "适用取向：需要一次出片就接近可交付的商业素材，减少后期修图与二次重抽。", "成本提示：高细节档通常单张成本更高，批量场景建议先用标准档打样、定稿后再用 -d 出终稿。"], "params": [["模型名", "gpt-image-2-d（gpt-image-2 的变体后缀）"], ["定位", "高细节 / 直出商用"], ["基础能力", "继承 gpt-image-2 的编辑、版式与文字渲染"], ["适用", "电商、广告、品牌视觉"], ["注意", "不同平台对 -d 后缀的支持口径不一，接入前确认"]], "scenes": ["电商终稿图与详情页。", "品牌视觉与广告主视觉。", "带文字的产品包装与海报。", "需要高保真的场景合成。"], "repo": "https://github.com/catrouter-net/gpt-image-2-d", "tags": ["image"]}, {"slug": "gpt-image-2.5", "name": "GPT-Image-2.5", "vendor": "OpenAI", "released": "2026年9月8日", "tagline": "Flare 主打快、Sunburst 主打精修的双变体组合，1K/2K/4K 全档位、五档质量可调，是 2026 年商用出图的主力之一。", "spec": "变体 GPT-Image-2.5 Flare（默认，快）/ Sunburst（精修，更慢）", "kind": "image", "facts": ["双变体分工：Flare 是大多数应用的默认选择，速度快、成片质量高，擅长自然光照与复杂版式；Sunburst 精度优先，单次请求耗时更长，换来对精细细节的额外保真。", "档位灵活：1K 试稿确认构图后升 2K/4K 出终稿，五档质量配合不同分辨率，能把单张成本压到最低。", "编辑能力：两个变体都提供文生图与编辑端点，多轮改图的一致性比上一代明显更稳，适合成套素材批量迭代。", "成品导向：官方把它定位为可以直接进生产流程的视觉工具，广告素材、产品图、版式化设计都能一次到位。"], "params": [["变体", "GPT-Image-2.5 Flare（默认，快）/ Sunburst（精修，更慢）"], ["输出分辨率", "1K / 2K / 4K"], ["质量档位", "五档可调"], ["端点", "文生图 + 参考图编辑"], ["能力", "自然光照、复杂版式、密集文字"], ["发布时间", "2026 年 9 月 8 日"]], "scenes": ["广告与营销成套素材批量出图。", "电商产品图、场景图与详情页视觉。", "带密集文字的海报、信息图与包装。", "参考图编辑：换背景、换配色、改版式。"], "repo": "https://github.com/catrouter-net/gpt-image-2.5", "tags": ["image"]}, {"slug": "gpt-image-2.6", "name": "GPT-Image-2.6", "vendor": "OpenAI", "released": "2026年11月4日", "tagline": "2026 年 11 月的最新图像版本：三档复杂度、标记引导编辑，还能直接输出 SVG 矢量图与 GIF 动画。", "spec": "变体 GPT-Image-2.6 Sunburst / Flare（编辑一致性与细节保留升级）", "kind": "image", "facts": ["标记引导编辑：不用再手写坐标，把圈选框、箭头或草图放在独立透明 PNG 图层里，与原图、文字指令一起提交即可精确定位修改区域。", "SVG 矢量输出：生成端点支持 1K 矢量输出，返回的是可编辑形状而非位图，Logo、图标、插画放大不糊。", "GIF 动画：同一端点可直接产出 2–64 帧、单帧 20–2000 毫秒的循环动画，做动态贴纸与动效素材不用再拼帧。", "三档复杂度：新增复杂度控制，简单素材用低档快速出，复杂商业稿用高档换细节，成本与速度自己平衡。", "注意边界：SVG/GIF 只在生成端点可用，编辑端点不支持；标记编辑作用于第一张输入图，且不能与 mask 参数混用。"], "params": [["变体", "GPT-Image-2.6 Sunburst / Flare（编辑一致性与细节保留升级）"], ["复杂度", "三档可调，配合 reasoning effort 控制出图速度"], ["新格式", "SVG 矢量（1K，仅生成端点）、GIF 动画（2–64 帧，20–2000ms）"], ["标记编辑", "原图 + 同尺寸透明 PNG 标记层 + 文字指令，一次请求完成圈选修改"], ["发布", "2026 年 11 月 4 日"]], "scenes": ["矢量 Logo、图标与插画交付（SVG）。", "动态贴纸、循环动画与动效素材（GIF）。", "精确局部修改：圈选换色、改字、修瑕疵。", "电商与广告的成套视觉批量生产。"], "repo": "https://github.com/catrouter-net/gpt-image-2.6", "tags": ["image"]}, {"slug": "gemini-nano-banana-2.1", "name": "Gemini Nano Banana 2.1", "vendor": "Google DeepMind", "released": "2026年10月6日", "tagline": "Gemini 3 家族的效率型图像模型（基于 Gemini 3.6 Flash）：1K/2K/4K 输出、最多十余张参考图、两万字符长提示。", "spec": "基座 Gemini 3.6 Flash", "kind": "image", "facts": ["效率定位：Nano Banana 2.1 属 Flash 档，为速度与低成本而设计，画质却能顶到 4K，官方用它替换 Nano Banana 2 与 Pro 成为日常主力。", "蒙版编辑：支持基于遮罩的局部编辑，改一处不影响整体，配合参考图还能保持主体特征与风格一致。", "文字渲染：模型卡明确改善图中文字表现，海报、包装、信息图里的中文与长文案能直出可用。", "参考与长提示：最多十余张参考图 + 两万字符提示，复杂版式与长规格说明可以一次性说清楚。", "推理加持：支持 thinking 与联网，可先规划版式与素材组合再出图，视觉设计和多图系列的一致性更好。"], "params": [["模型名", "gemini-nano-banana-2.1（俗称 Nano Banana 2.1）"], ["基座", "Gemini 3.6 Flash"], ["输出", "1K / 2K / 4K"], ["参考图", "最多约 10–14 张"], ["提示长度", "最长 20,000 字符"], ["能力", "蒙版编辑、主体一致性、图中文字渲染、thinking"], ["发布时间", "2026 年 10 月 6 日"]], "scenes": ["品牌视觉与电商成套出图（主体一致性）。", "带长文案的海报、包装与信息图。", "蒙版局部改图：换色、换物、去瑕疵。", "多参考图的产品场景合成。"], "repo": "https://github.com/catrouter-net/gemini-nano-banana-2.1", "tags": ["image"]}]}, {"id": "video", "name": "视频生成", "desc": "原生音频、长镜头、多参考集", "models": [{"slug": "minimax-h3", "name": "MiniMax H3", "vendor": "MiniMax", "released": "2026年7月31日", "tagline": "全模态生成模型：文本、图像、视频、声音统一理解，直接输出带原生双声道的 15 秒 2K 视频。", "spec": "时长 5–15 秒（最高 15s）", "kind": "video", "facts": ["全模态统一：H3 不是“文生视频”单点能力，而是统一理解文本、图像、视频、声音四种上下文的通用生成模型。", "原生双声道：音频和画面在同一次生成中产出，口型、环境声、音效天然对齐，省掉后期配音与对轨。", "参考控制：最多 9 张图 + 3 段视频 + 3 段音频做参考，角色一致性、运镜风格、音色的可控性接近导演级。", "商用能力：官方称具备商用级多场景内容生成能力，适合广告、电商、短剧、社媒的批量出片。"], "params": [["时长", "5–15 秒（最高 15s）"], ["分辨率", "最高 2K，24fps"], ["音频", "原生双声道，画面与声音一次生成"], ["参考输入", "最多 9 张参考图 / 3 段参考视频 / 3 段参考音频"], ["语音", "Speech 2.8 HD：40+ 语种、300+ 音色、10 秒克隆"], ["发布时间", "2026 年 7 月 31 日"]], "scenes": ["广告与电商短视频批量出片。", "短剧与剧情片段，多镜一致角色。", "社媒口播与带音效的产品展示。", "多语言配音与本地化版本。"], "repo": "https://github.com/catrouter-net/minimax-h3", "tags": ["video"]}, {"slug": "doubao-seedance-2-0-fast-260128", "name": "Doubao Seedance 2.0 Fast", "vendor": "字节跳动 Seed", "released": "2026年1月28日（模型版本号 260128）", "tagline": "Seedance 2.0 的 Fast 档：音视频联合生成，文本/图像/音频/视频四模态输入，出片更快。", "spec": "时长 4–15 秒", "kind": "video", "facts": ["联合生成架构：Seedance 2.0 用统一的音视频联合生成架构，一次产出画面与匹配的声音，不再分两步。", "四模态输入：文本、图像、音频、视频都能作为参考，支持视频编辑与视频延长，参考精度高。", "多镜头叙事：单条提示词可生成多镜头连贯内容，跨镜头保持角色与场景一致。", "Fast 档取舍：Fast 版本牺牲少量细节换出片速度，适合批量试稿与快速迭代；定稿再换标准档。"], "params": [["基础模型", "Seedance 2.0（2026 年 2 月 12 日发布）"], ["时长", "4–15 秒"], ["分辨率", "最高 1080P–2K，横竖屏可选"], ["音频", "原生音频，口型与音效帧级同步"], ["输入", "文本 / 图像 / 音频 / 视频 四模态"], ["版本后缀", "260128 = 2026-01-28 权重组 / Fast 加速档"]], "scenes": ["电商与广告短视频快速试稿。", "社媒内容批量生产。", "产品演示与多语言口播。", "视频编辑、延长与续写。"], "repo": "https://github.com/catrouter-net/doubao-seedance-2-0-fast-260128", "tags": ["video"]}, {"slug": "sd-2-5-480p", "name": "SD 2.5 480p", "vendor": "字节跳动 Seed（Seedance 2.5）", "released": "2026年8月", "tagline": "Seedance 2.5 的 480p 档：30 秒连续镜头、超大参考集，成本最低的快速出片通道。", "spec": "时长 最长 30 秒（支持 Auto）", "kind": "video", "facts": ["480p 档定位：同一条提示词先用 480p 试构图与节奏，确认后再升 720p/1080p 出终稿，是最省钱的迭代路径。", "30 秒长镜头：2.5 把单条时长拉到 30 秒并支持自动续接，480p 档最适合跑长镜头的结构验证。", "超大参考集：30 图 + 10 视频 + 10 音频的参考规模，角色、场景、运镜、音色都能被精确锁定。", "成本优势：分辨率越低单价越低，480p 适合大批量 A/B 试稿与素材筛选。"], "params": [["基础模型", "Seedance 2.5（2026 年 8 月上线）"], ["时长", "最长 30 秒（支持 Auto）"], ["分辨率档", "480p / 720p / 1080p，本档为 480p"], ["参考集", "最多 30 张图 / 10 段视频 / 10 段音频"], ["音频", "原生音频，随画面同步生成"], ["适合", "快速预览、概念验证、社媒竖屏"]], "scenes": ["批量概念验证与分镜试稿。", "社媒竖屏短内容快速出片。", "长镜头结构验证（30 秒连续）。", "大参考集的项目（角色 + 场景 + 音色）。"], "repo": "https://github.com/catrouter-net/sd-2-5-480p", "tags": ["video"]}]}];
+
+const KIND_LABEL={text:'文本',image:'图像',video:'视频'};
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg||'已复制'; t.classList.add('on');
+  clearTimeout(window.__tt); window.__tt=setTimeout(()=>t.classList.remove('on'),1400);
+}
+async function copyText(txt,msg){
+  try{ await navigator.clipboard.writeText(txt); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  toast(msg);
+}
+
+function renderRow(m){
+  const kindCls=m.kind==='image'?'img':(m.kind==='video'?'vid':'');
+  const params=m.params.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('');
+  const facts=m.facts.map(f=>`<li>${esc(f)}</li>`).join('');
+  const scenes=m.scenes.map(s=>`<li>${esc(s)}</li>`).join('');
+  return `<article class="row" data-kind="${m.kind}" data-slug="${esc(m.slug)}" aria-expanded="false">
+    <div class="row-h" role="button" tabindex="0" aria-label="展开 ${esc(m.name)} 详情">
+      <div class="nm">${esc(m.name)}<i class="${kindCls}">${KIND_LABEL[m.kind]}</i></div>
+      <div class="tl">${esc(m.tagline)}</div>
+      <div class="sp">${esc(m.spec)}</div>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="detail"><div class="grid">
+      <div><h4>关键参数</h4><table><colgroup><col class="c1"><col></colgroup>${params}</table></div>
+      <div><h4>为什么值得用</h4><ul>${facts}</ul>
+        <h4>适合什么活</h4><ul>${scenes}</ul></div>
+    </div>
+    <h4 style="margin-top:16px">上手</h4>
+    <div class="adv-links">
+      <a class="linkbtn" href="${esc(m.repo)}" target="_blank" rel="noopener">打开接入仓库</a>
+      <button class="linkbtn" data-copy="${esc(m.slug)}">复制模型名</button>
+      <button class="linkbtn" data-copy="from openai import OpenAI&#10;client = OpenAI(api_key=&quot;sk-你的中转Key&quot;, base_url=&quot;https://catrouter.net/v1&quot;)&#10;client.chat.completions.create(model=&quot;${esc(m.slug)}&quot;, messages=[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;hi&quot;}])">复制调用片段</button>
+    </div></div>
+  </article>`;
+}
+
+let F={kind:'all',q:''};
+function renderIndex(){
+  const idx=$('#index'); let html=''; let shown=0;
+  GROUPS.forEach(g=>{
+    const list=g.models.filter(m=>{
+      if(F.kind!=='all'&&m.kind!==F.kind) return false;
+      if(!F.q) return true;
+      const hay=(m.name+' '+m.vendor+' '+m.tagline+' '+m.spec+' '+KIND_LABEL[m.kind]).toLowerCase();
+      return hay.includes(F.q.toLowerCase());
+    });
+    if(!list.length) return;
+    shown+=list.length;
+    html+=`<section class="group"><div class="group-h"><h3>${esc(g.name)}</h3><span>${esc(g.desc)}</span><em>${list.length}</em></div>`;
+    html+=list.map(renderRow).join('');
+    html+='</section>';
+  });
+  if(!shown) html='<div class="empty">没有匹配的模型，换个关键词试试。</div>';
+  idx.innerHTML=html;
+  $('#count').textContent=`${shown} / ${GROUPS.reduce((n,g)=>n+g.models.length,0)} 个模型`;
+}
+renderIndex();
+
+$('#index').addEventListener('click',e=>{
+  const row=e.target.closest('.row');
+  if(!row) return;
+  if(e.target.closest('.detail')) return;
+  if(e.target.closest('[data-copy]')){ const btn=e.target.closest('[data-copy]'); copyText(btn.getAttribute('data-copy')); return; }
+  const open=row.getAttribute('aria-expanded')==='true';
+  $('#index').querySelectorAll('.row').forEach(r=>r.setAttribute('aria-expanded','false'));
+  row.setAttribute('aria-expanded',open?'false':'true');
+});
+$('#index').addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ') return;
+  const h=e.target.closest('.row-h'); if(!h) return;
+  e.preventDefault(); h.click();
+});
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-copy]');
+  if(c&&!c.closest('.row')) copyText(c.getAttribute('data-copy'));
+});
+
+$('#q').addEventListener('input',e=>{F.q=e.target.value.trim();renderIndex();});
+document.querySelectorAll('[data-filter="kind"] .chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('[data-filter="kind"] .chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+    c.setAttribute('aria-pressed','true'); F.kind=c.dataset.val; renderIndex();
+  });
+});
+
+/* ---------- 选型助手 ---------- */
+const PICK={
+ 'coding|cheap':['glm-5.3-flash','原生多模态 + 编程能力仅次于旗舰档，单价低，前端原型与代码生成够用。'],
+ 'coding|balanced':['claude-sonnet-5-5','Terminal-Bench 4.0 达 70.6%，速度与成本平衡，适合日常编码 Agent。'],
+ 'coding|max':['claude-opus-5-5','百万上下文 + 长程自主编码，成本比 Opus 5 低约 40%，硬骨头交给它。'],
+ 'longctx|cheap':['deepseek-v4','1M 上下文是官方默认，DSA 稀疏注意力把长文档成本压得很低。'],
+ 'longctx|balanced':['gemini-3.8-flash','DeepSWE v1.1 73.7%，effort 档位可调，长任务不必上旗舰价。'],
+ 'longctx|max':['gpt-6.1-sol','105 万上下文、$2/$10 每百万 token，长上下文里最不像旗舰价的旗舰。'],
+ 'reasoning|cheap':['deepseek-v4-pro-0813','开源阵营推理天花板，0813 权重组，价格远低于闭源旗舰。'],
+ 'reasoning|balanced':['gpt-6-astra','五档推理强度 Low→Max，按难度付钱，能力上限最高。'],
+ 'reasoning|max':['claude-fable-5','Mythos 级，任务越长越复杂领先越多；注意内置安全分类器可能拒答。'],
+ 'agent|cheap':['kimi-k3','2.8T 开源 3T 级 + 原生视觉，长程任务性价比极高。'],
+ 'agent|balanced':['grok-4.7','按数小时难题重训，强调自我校验，Agent 返工率明显更低。'],
+ 'agent|max':['claude-fable-5','长跑场景的领先幅度最大，适合一天级任务链。'],
+ 'image|cheap':['gemini-nano-banana-2.1','Flash 档成本、4K 画质，蒙版编辑与主体一致性都够用。'],
+ 'image|balanced':['gpt-image-2.5','Flare 默认快出，1K 试稿 4K 定稿，商用素材性价比最高。'],
+ 'image|max':['gpt-image-2.6','标记引导编辑 + SVG/GIF 输出，单张精度与交付格式都最全。'],
+ 'video|cheap':['sd-2-5-480p','480p 档单价最低，30 秒长镜头先验证结构再升档。'],
+ 'video|balanced':['doubao-seedance-2-0-fast-260128','音视频联合生成，四模态输入，批量试稿速度快。'],
+ 'video|max':['minimax-h3','15 秒 2K + 原生双声道，角色一致性与运镜控制最强。']
+};
+const AD={task:null,budget:null};
+function findModel(slug){
+  for(const g of GROUPS) for(const m of g.models) if(m.slug===slug) return m;
+  return null;
+}
+function renderAdv(){
+  const pk=$('#advPick'), why=$('#advWhy'), links=$('#advLinks');
+  if(!AD.task||!AD.budget){
+    pk.textContent='先选一个任务类型和一个预算取向';
+    why.textContent='两个都选完，会给出模型名、理由和对应仓库。';
+    links.innerHTML=''; return;
+  }
+  let key=AD.task+'|'+AD.budget;
+  let rec=PICK[key];
+  if(!rec){ key=AD.task+'|balanced'; rec=PICK[key]; }
+  if(!rec){ key=AD.task+'|cheap'; rec=PICK[key]; }
+  if(!rec){ pk.textContent='这个组合暂无推荐'; why.textContent='换个任务类型试试。'; links.innerHTML=''; return; }
+  const m=findModel(rec[0]);
+  pk.textContent=m?m.name:rec[0];
+  why.textContent=rec[1];
+  links.innerHTML=(m?`<a class="linkbtn" href="${esc(m.repo)}" target="_blank" rel="noopener">打开接入仓库</a>`:'')
+    +`<button class="linkbtn" data-copy="${esc(rec[0])}">复制模型名</button>`;
+}
+document.querySelectorAll('[data-ad] .chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const grp=c.closest('[data-ad]'); const k=grp.dataset.ad;
+    grp.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+    c.setAttribute('aria-pressed','true'); AD[k]=c.dataset.val; renderAdv();
+  });
+});
+
+</script></body></html>
