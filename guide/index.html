@@ -1,52 +1,57 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026 年中转站怎么挑：五个能当场验证的指标 | CatRouter</title>
-<meta name="description" content="中转站推荐别只看价格。五个可以当场验证的指标：上游是否官方通道、线路冗余、失败重试与计费、账单透明度、模型版本后缀，附常见坑与对照表。">
+<title>中转站怎么挑：五个自己就能验证的指标 | CatRouter</title>
+<meta name="description" content="不用听谁推荐。五条能在半小时内自己验证的判断方法：上游是不是官方通道、线路有没有冗余、失败算不算钱、账单能不能对、模型名有没有版本后缀。">
 <link rel="canonical" href="https://catrouter-net.github.io/catrouter-hub/guide/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="article"><meta property="og:title" content="2026 年中转站怎么挑：五个能当场验证的指标 | CatRouter">
-<meta property="og:description" content="中转站推荐别只看价格。五个可以当场验证的指标：上游是否官方通道、线路冗余、失败重试与计费、账单透明度、模型版本后缀，附常见坑与对照表。">
+<meta property="og:type" content="article"><meta property="og:title" content="中转站怎么挑：五个自己就能验证的指标 | CatRouter">
+<meta property="og:description" content="不用听谁推荐。五条能在半小时内自己验证的判断方法：上游是不是官方通道、线路有没有冗余、失败算不算钱、账单能不能对、模型名有没有版本后缀。">
 <meta property="og:url" content="https://catrouter-net.github.io/catrouter-hub/guide/"><meta property="og:site_name" content="CatRouter 模型索引">
 <meta property="og:image" content="https://catrouter-net.github.io/catrouter-hub/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "2026 年中转站怎么挑：五个能当场验证的指标", "description": "中转站推荐别只看价格。五个可以当场验证的指标：上游是否官方通道、线路冗余、失败重试与计费、账单透明度、模型版本后缀，附常见坑与对照表。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/guide/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "2026 年中转站怎么挑：五个能当场验证的指标", "item": "https://catrouter-net.github.io/catrouter-hub/guide/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "中转站怎么挑：五个自己就能验证的指标", "description": "不用听谁推荐。五条能在半小时内自己验证的判断方法：上游是不是官方通道、线路有没有冗余、失败算不算钱、账单能不能对、模型名有没有版本后缀。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/guide/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "中转站怎么挑：五个自己就能验证的指标", "item": "https://catrouter-net.github.io/catrouter-hub/guide/"}]}]</script>
 </head><body>
 <header class="top"><div class="shell"><a class="brand" href="../"><b>CatRouter</b><span>MODEL INDEX</span></a><nav class="navbar"><a href="../">模型索引</a><a href="../guide/" class="on">怎么挑中转站</a><a href="../claude-opus-5-5/">Opus 5.5 实测</a><a href="../gemini/">Gemini 双雄</a><a href="../price/">价格测算</a><a href="../setup/">三步接入</a><a href="../about/">关于本站</a></nav><div class="cta"><button class="copybtn" data-copy="https://catrouter.net/v1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5h10"/></svg>复制 BaseURL</button></div></div></header>
-<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / 2026 年中转站怎么挑：五个能当场验证的指标</div><h1>2026 年中转站怎么挑：五个能当场验证的指标</h1><p class="lede" style="margin-bottom:0">能长期用的中转站，靠的是线路冗余、版本跟得上、账单看得懂这三件事，不是页面上的模型数量。</p><div class="art-meta"><span>实测整理</span><span>约 8 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
-<div class="callout"><b>一句话结论</b>：把「上游是不是官方通道」问清楚，能筛掉市场上大半的选项。</div>
-<h2>一、先分清三条路，别拿中转和官方直连比价格</h2>
-<p>国内开发者调海外模型，实际只有三条路：官方直连、自建代理、中转。三者成本结构完全不同，用同一个「每百万 token 多少钱」去比，很容易得出错误结论。</p>
+<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / 中转站怎么挑：五个自己就能验证的指标</div><h1>中转站怎么挑：五个自己就能验证的指标</h1><p class="lede" style="margin-bottom:0">看榜单不如自己跑两轮。下面每一条都能当场验证，不需要转述别人的说法。</p><div class="art-meta"><span>实测整理</span><span>约 8 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
+<p>挑中转站这件事，最省时间的办法不是看测评，是问三个问题然后自己测。下面按能验证的顺序排。</p>
+
+<h2>先分清三条路，再谈贵不贵</h2>
+<p>调海外模型只有三条路：官方直连、自建代理、中转。成本结构不一样，拿「每百万 token 多少钱」直接横比没有意义。</p>
 <table><colgroup><col style="width:20%"><col style="width:28%"><col style="width:26%"><col style="width:26%"></colgroup>
 <thead><tr><th>维度</th><th>官方直连</th><th>自建代理</th><th>中转</th></tr></thead><tbody>
-<tr><td>可用性</td><td>国内不稳定</td><td>取决于你的机器与线路</td><td>多节点冗余，通常最好</td></tr>
-<tr><td>成本</td><td>官方价，最低</td><td>官方价 + 机器 + 人力</td><td>官方价 × 倍率</td></tr>
-<tr><td>账单</td><td>清晰</td><td>要自己做统计</td><td>取决于平台透明度</td></tr>
-<tr><td>适合</td><td>有海外机与运维</td><td>有专职运维的团队</td><td>绝大多数个人与团队</td></tr>
+<tr><td>能不能用</td><td>国内经常断，要有网络方案</td><td>看你买的机器和线路</td><td>多节点，通常最稳</td></tr>
+<tr><td>钱花在哪</td><td>官方价</td><td>官方价 + 机器 + 人力</td><td>官方价 × 倍率</td></tr>
+<tr><td>账单</td><td>清楚</td><td>要自己做统计</td><td>看平台愿不愿意给你看</td></tr>
+<tr><td>适合谁</td><td>有海外机和运维</td><td>有专职运维</td><td>大部分人</td></tr>
 </tbody></table>
-<p>中转贵出来的部分，买的是「不用自己维护线路」。项目每天只跑几十次请求时，自建一台小机器再折腾网络的时间成本，早就超过差价。</p>
+<p>中转贵的那部分，实际上是买「线路不用自己维护」。一天只跑几十次请求的话，自己开一台机器再折腾网络，时间成本早超过差价了。</p>
 
-<h2>二、五个能当场验证的指标</h2>
-<h3>1. 上游是官方通道还是逆向</h3>
-<p>这一条决定其他所有事。逆向通道的典型特征：价格低到离谱、并发一上来就 429、模型版本永远滞后官方两三周。验证方法很直接——问对方最新模型的上线时间，再和官方发布节奏对一遍：Claude Opus 5.5 是 7 月 24 日，Fable 5.1 是 9 月 1 日，GPT-6 Astra 在 9 月，Gemini 4 Argon 是 9 月发布、10 月中旬全球上线。三条都答不上来，基本可以排除。</p>
-<h3>2. 线路是不是真的多节点</h3>
-<p>单线中转在晚高峰的表现和双线差别极大。可验证的做法：同一段提示词连跑 20 次，看 P95 延迟的波动范围。波动小说明有路由与故障切换，波动到几倍说明只有一条线。</p>
-<h3>3. 失败是否重试，重试是否计费</h3>
-<p>长任务最怕跑到一半断线。平台在网关层做一次透明重试、失败请求不计费，这两点要提前问清。否则一个 Agent 任务失败三次，账单就是三次。</p>
-<h3>4. 计费单位是否可查</h3>
-<p>至少要能看到每次调用的输入 token、输出 token 与单价。只给一个总额的平台，出问题时没法定位是模型涨价、提示词变长，还是被多扣。</p>
-<h3>5. 模型名的版本后缀</h3>
-<p>后缀不同往往就是不同权重组。<code>deepseek-v4-pro-0813</code>、<code>doubao-seedance-2-0-fast-260128</code> 这类带日期的名字，效果与价格都可能变。平台只给模糊别名，你就无法复现线上效果。</p>
+<h2>1. 上游是官方通道，还是逆向</h2>
+<p>这一条决定其他所有事。逆向通道有几个很好认的特征：价格低到不合常理、并发一上来就 429、模型版本总比官方便宜两三周。</p>
+<p>验证直接问：这个模型什么时候上线的。答不上来或者答错，就不用往下聊了。参照点：Claude Opus 5.5 是 7 月 24 日，Fable 5.1 是 9 月 1 日，GPT-6 Astra 在 9 月，Gemini 4 Argon 9 月发布、10 月中旬全球开。</p>
 
-<h2>三、四个常见的坑</h2>
+<h2>2. 线路到底有没有冗余</h2>
+<p>单线和双线在晚高峰是两种产品。测法很简单：同一段提示词连跑 20 次，看 P95 延迟的波动。波动在一倍以内，说明有路由和故障切换；忽高忽低到几倍，基本就是一条线在硬撑。</p>
+
+<h2>3. 失败了算不算钱</h2>
+<p>长任务最怕跑到一半断。两件事要提前问：网关层有没有透明重试，失败请求计不计费。不问清楚，一个 Agent 任务失败三次，你付三次钱。</p>
+
+<h2>4. 账单能不能对上</h2>
+<p>至少要能看到每次调用的输入 token、输出 token 和单价。只给总额的平台，月底对不上账时你没法判断是模型涨价了、提示词变长了，还是被多扣了。</p>
+
+<h2>5. 模型名有没有版本后缀</h2>
+<p>后缀不同往往是不同权重。比如 <code>deepseek-v4-pro-0813</code>、<code>doubao-seedance-2-0-fast-260128</code>，名字带日期不是装饰，改了日期效果和价格都可能变。平台如果只给一个模糊别名，线上效果复现不了。</p>
+
+<h2>几个白花钱的坑</h2>
 <ul>
-<li><strong>把模型数量当实力</strong>。挂 500 个模型但主力型号缺版本，等于零。</li>
-<li><strong>只看倍率不看实付</strong>。倍率低但分词口径不同（Claude 4.7 之后同样文字约多 30% token），实际单价更高。</li>
-<li><strong>用免费额度做验收</strong>。免费档通常限速限并发，测不出生产表现，至少用小额付费额度跑一轮真实流量。</li>
-<li><strong>不设预算上限</strong>。Agent 应用最容易失控，一个死循环能烧掉一天预算。</li>
+<li>拿模型数量当实力。挂 500 个模型、主力型号缺版本，等于没有。</li>
+<li>只看倍率不看实付。倍率低但分词口径偏，Claude 4.7 之后同样文字大约多算 30% token，实付反而更高。</li>
+<li>用免费额度验收。免费档一般限速限并发，测不出生产表现。花几十块跑一天真实流量，比测十次都准。</li>
+<li>不设预算上限。Agent 应用最容易失控，一个死循环能烧掉一整天。</li>
 </ul>
 
-<h2>四、这一页收录的模型怎么定的</h2>
-<p>只收录能查到官方发布日期、上下文档位和定价口径的模型。价格不确定的写「按平台倍率」，不编数字。跑分只引官方或一手评测，标注口径（如 Terminal-Bench 4.0、DeepSWE v1.1）。</p>
-<div class="sources"><h2>参考资料</h2><ul><li><a href="https://deepmind.google/models/gemini/" target="_blank" rel="noopener nofollow">Google DeepMind · Gemini 系列模型页</a></li><li><a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener nofollow">Gemini 4 Argon 模型卡</a></li><li><a href="https://www.anthropic.com/claude/fable?hsLang=en" target="_blank" rel="noopener nofollow">Anthropic · Claude Fable 系列与定价</a></li></ul></div><div class="rel"><h2>接着看</h2><a class="linkbtn" href="/catrouter-hub/price/">价格测算</a><a class="linkbtn" href="/catrouter-hub/setup/">三步接入</a><a class="linkbtn" href="/catrouter-hub/claude-opus-5-5/">Opus 5.5 实测</a></div><p style="margin-top:22px;font-size:12.5px;color:var(--slate)">本文由 CatRouter 技术组 整理，最后更新 2026-11-09。价格与跑分随厂商更新浮动，以官方页面为准；发现数据有误可在 <a href="https://github.com/catrouter-net/">GitHub</a> 提 issue。</p></div></div></main>
+<h2>这一页收录模型的口径</h2>
+<p>只收能查到官方发布日期、上下文档位和定价说法的。价格查不到的写「按平台倍率」，不编数字。跑分只引官方发布页或一手评测，注明口径（Terminal-Bench 4.0、DeepSWE v1.1 之类）。</p>
+<div class="sources"><h2>参考资料</h2><ul><li><a href="https://deepmind.google/models/gemini/" target="_blank" rel="noopener nofollow">Google DeepMind · Gemini 系列模型页</a></li><li><a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener nofollow">Gemini 4 Argon 模型卡</a></li><li><a href="https://www.anthropic.com/claude/fable?hsLang=en" target="_blank" rel="noopener nofollow">Anthropic · Fable 系列与定价</a></li></ul></div><div class="rel"><h2>接着看</h2><a class="linkbtn" href="/catrouter-hub/price/">价格测算</a><a class="linkbtn" href="/catrouter-hub/setup/">三步接入</a><a class="linkbtn" href="/catrouter-hub/claude-opus-5-5/">Opus 5.5 实测</a></div><p style="margin-top:22px;font-size:12.5px;color:var(--slate)">本文由 CatRouter 技术组 整理，最后更新 2026-11-09。价格与跑分随厂商更新浮动，以官方页面为准；发现数据有误可在 <a href="https://github.com/catrouter-net/">GitHub</a> 提 issue。</p></div></div></main>
 <footer><div class="shell"><div class="foot-b"><span>© 2026 CatRouter</span><a href="https://catrouter.net">https://catrouter.net</a><a href="about/">编辑与数据说明</a><a href="https://github.com/catrouter-net/">GitHub 仓库</a><span>内容更新：2026-11-09</span></div></div></footer><div class="toast" id="toast">已复制</div><script src="app.js"></script></body></html>

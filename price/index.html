@@ -1,34 +1,35 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>模型价格测算：一个月大概花多少 | CatRouter</title>
-<meta name="description" content="把 token 成本算清楚：公开标价对照表、月成本公式与可直接用的计算器，另有分层调度、前缀缓存、预算闸门三条省钱做法。">
+<title>算笔账：这些模型一个月要花多少 | CatRouter</title>
+<meta name="description" content="公开标价对照、月成本公式与一个能直接用的计算器，以及三条真能省钱的做法规：分层调度、前缀缓存、预算闸门。">
 <link rel="canonical" href="https://catrouter-net.github.io/catrouter-hub/price/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="article"><meta property="og:title" content="模型价格测算：一个月大概花多少 | CatRouter">
-<meta property="og:description" content="把 token 成本算清楚：公开标价对照表、月成本公式与可直接用的计算器，另有分层调度、前缀缓存、预算闸门三条省钱做法。">
+<meta property="og:type" content="article"><meta property="og:title" content="算笔账：这些模型一个月要花多少 | CatRouter">
+<meta property="og:description" content="公开标价对照、月成本公式与一个能直接用的计算器，以及三条真能省钱的做法规：分层调度、前缀缓存、预算闸门。">
 <meta property="og:url" content="https://catrouter-net.github.io/catrouter-hub/price/"><meta property="og:site_name" content="CatRouter 模型索引">
 <meta property="og:image" content="https://catrouter-net.github.io/catrouter-hub/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "把账算清：这些模型一个月大概花多少", "description": "把 token 成本算清楚：公开标价对照表、月成本公式与可直接用的计算器，另有分层调度、前缀缓存、预算闸门三条省钱做法。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/price/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "把账算清：这些模型一个月大概花多少", "item": "https://catrouter-net.github.io/catrouter-hub/price/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "算笔账：这些模型一个月要花多少", "description": "公开标价对照、月成本公式与一个能直接用的计算器，以及三条真能省钱的做法规：分层调度、前缀缓存、预算闸门。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/price/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "算笔账：这些模型一个月要花多少", "item": "https://catrouter-net.github.io/catrouter-hub/price/"}]}]</script>
 </head><body>
 <header class="top"><div class="shell"><a class="brand" href="../"><b>CatRouter</b><span>MODEL INDEX</span></a><nav class="navbar"><a href="../">模型索引</a><a href="../guide/">怎么挑中转站</a><a href="../claude-opus-5-5/">Opus 5.5 实测</a><a href="../gemini/">Gemini 双雄</a><a href="../price/" class="on">价格测算</a><a href="../setup/">三步接入</a><a href="../about/">关于本站</a></nav><div class="cta"><button class="copybtn" data-copy="https://catrouter.net/v1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5h10"/></svg>复制 BaseURL</button></div></div></header>
-<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / 把账算清：这些模型一个月大概花多少</div><h1>把账算清：这些模型一个月大概花多少</h1><p class="lede" style="margin-bottom:0">公开标价只覆盖有定价页的型号。Claude 与部分 Gemini 走平台倍率，实付按当天汇率算，别拿别人的截图当准数。</p><div class="art-meta"><span>价格数据</span><span>约 5 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
-<h2>官方标价对照</h2>
+<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / 算笔账：这些模型一个月要花多少</div><h1>算笔账：这些模型一个月要花多少</h1><p class="lede" style="margin-bottom:0">公开标价只覆盖有定价页的型号。Claude 和部分 Gemini 走平台倍率，实付按当天汇率算，别人的截图不能当准数。</p><div class="art-meta"><span>价格数据</span><span>约 5 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
+<h2>公开标价对照</h2>
 <table><colgroup><col style="width:24%"><col style="width:26%"><col style="width:26%"><col style="width:24%"></colgroup>
 <thead><tr><th>模型</th><th>输入 / 百万 token</th><th>输出 / 百万 token</th><th>备注</th></tr></thead><tbody>
 <tr><td>gpt-6.1-sol</td><td>$2</td><td>$10</td><td>105 万上下文，六代里最便宜</td></tr>
-<tr><td>gpt-6-astra</td><td>$10</td><td>$50</td><td>短上下文价，长上下文有溢价</td></tr>
+<tr><td>gpt-6-astra</td><td>$10</td><td>$50</td><td>短上下文价，长上下文另算</td></tr>
 <tr><td>gpt-5-5</td><td>$5</td><td>$30</td><td>Batch / Flex 五折</td></tr>
 <tr><td>gpt-5.6-terra</td><td>约为 5.5 的一半</td><td>约为 5.5 的一半</td><td>官方口径「成本减半」</td></tr>
-<tr><td>claude-fable-5-1</td><td>$10</td><td>$50</td><td>缓存读取 $0.25，5m 写 $12.50 / 1h 写 $20</td></tr>
-<tr><td>claude-opus-5-5</td><td>按平台倍率</td><td>按平台倍率</td><td>官方未列出固定公开价</td></tr>
+<tr><td>claude-fable-5-1</td><td>$10</td><td>$50</td><td>缓存读取 $0.25；5m 写 $12.50、1h 写 $20</td></tr>
+<tr><td>claude-opus-5-5</td><td>按平台倍率</td><td>按平台倍率</td><td>官方没有固定公开价</td></tr>
 <tr><td>gemini-4</td><td>按平台倍率</td><td>按平台倍率</td><td>订阅与 API 两套体系</td></tr>
-<tr><td>deepseek-v4</td><td>按平台倍率</td><td>按平台倍率</td><td>开源档，单价显著更低</td></tr>
+<tr><td>deepseek-v4</td><td>按平台倍率</td><td>按平台倍率</td><td>开源档，单价明显更低</td></tr>
 </tbody></table>
 
 <h2>自己算一遍</h2>
-<p>公式只有一条：<code>月成本 = 日请求数 × 30 × (输入 token × 输入单价 + 输出 token × 输出单价)</code>。听起来简单，实际最容易错在三处：把字符数当 token、忘了输出比输入贵 3–5 倍、没算重试。</p>
+<p>公式一条就够：<code>月成本 = 日请求数 × 30 × (输入 token × 输入单价 + 输出 token × 输出单价)</code>。</p>
+<p>错的地方通常在三个：把字符数当 token、忘了输出比输入贵三到五倍、没算重试。</p>
 <div class="calc">
   <div class="calc-grid">
     <div><label for="cReq">日请求数</label><input id="cReq" type="number" value="2000" min="0" step="100"></div>
@@ -38,13 +39,11 @@
   </div>
   <div class="calc-out"><div class="n" id="cRes">—</div><p id="cNote">选好参数自动算每月花费（人民币，按 1 美元 ≈ 7.1 元换算）。</p></div>
 </div>
-<p>默认值试算：日请求 2000、输入 1200 token、输出 400 token，全走 gpt-6.1-sol，一个月约 1 万出头；同样的量换 gpt-6-astra，直接翻五倍。这就是「先用便宜档验证流程，再上旗舰」几乎是所有团队默认路径的原因。</p>
+<p>拿默认值试一下：日请求 2000、输入 1200 token、输出 400 token，全走 gpt-6.1-sol，一个月一万出头；同样的量换 gpt-6-astra，翻五倍。先用便宜档把流程跑通，再上旗舰，几乎是所有团队的默认路径，原因就在这。</p>
 
-<h2>三条省钱的做法</h2>
-<ul>
-<li><strong>分层调度</strong>：分类、抽取、改写交给便宜档，只有真正需要推理的请求才路由到旗舰。多数业务的七成请求属于前者。</li>
-<li><strong>前缀缓存</strong>：系统提示、工具定义、长文档放前面且保持字节一致，能吃到缓存。Fable 5.1 的缓存读取比 Fable 5 便宜 75%，配好之后重 Agent 负载最多省约 45%。</li>
-<li><strong>设预算闸门</strong>：按天或按 Key 设上限。Agent 类应用必须有，否则一个死循环就能烧穿一个月额度。</li>
-</ul>
+<h2>三条真能省钱的</h2>
+<p><strong>分层调度。</strong>分类、抽取、改写交给便宜档，只有确实需要推理的才路由到旗舰。多数业务七成请求属于前者。</p>
+<p><strong>前缀缓存。</strong>系统提示、工具定义、长文档放最前面，并且保持字节一致，才吃得到缓存。Fable 5.1 的缓存读取比 Fable 5 便宜 75%，配好了重 Agent 负载最多省四成多。</p>
+<p><strong>预算闸门。</strong>按天或按 Key 设上限。Agent 类应用都得有，不然一个死循环就能烧掉一个月额度。</p>
 <div class="sources"><h2>参考资料</h2><ul><li><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1?category=cms" target="_blank" rel="noopener nofollow">Anthropic · Fable 5.1 定价与缓存说明</a></li><li><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener nofollow">Claude 平台文档 · Fable 5.1 定价页</a></li></ul></div><div class="rel"><h2>接着看</h2><a class="linkbtn" href="/catrouter-hub/guide/">怎么挑中转站</a><a class="linkbtn" href="/catrouter-hub/setup/">三步接入</a><a class="linkbtn" href="/catrouter-hub/claude-opus-5-5/">Opus 5.5 实测</a></div><p style="margin-top:22px;font-size:12.5px;color:var(--slate)">本文由 CatRouter 技术组 整理，最后更新 2026-11-09。价格与跑分随厂商更新浮动，以官方页面为准；发现数据有误可在 <a href="https://github.com/catrouter-net/">GitHub</a> 提 issue。</p></div></div></main>
 <footer><div class="shell"><div class="foot-b"><span>© 2026 CatRouter</span><a href="https://catrouter.net">https://catrouter.net</a><a href="about/">编辑与数据说明</a><a href="https://github.com/catrouter-net/">GitHub 仓库</a><span>内容更新：2026-11-09</span></div></div></footer><div class="toast" id="toast">已复制</div><script src="app.js"></script></body></html>

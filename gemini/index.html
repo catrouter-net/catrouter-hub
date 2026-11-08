@@ -1,40 +1,39 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gemini 4 Argon 与 3.8 Flash 怎么选：什么时候该多花那份钱 | CatRouter</title>
-<meta name="description" content="Gemini 3.8 Flash（2026-09-02，DeepSWE v1.1 73.7%）与 Gemini 4 Argon（100 万上下文、100 万长解码、三档思考、非微调）对比，给出选型判断与两个实操建议。">
+<title>Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上 | CatRouter</title>
+<meta name="description" content="3.8 Flash 在 2026-09-02 发布，DeepSWE v1.1 73.7%；Gemini 4 Argon 是全新基座，100 万上下文、100 万长解码、三档思考。两者的差价该不该付，看任务类型。">
 <link rel="canonical" href="https://catrouter-net.github.io/catrouter-hub/gemini/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="article"><meta property="og:title" content="Gemini 4 Argon 与 3.8 Flash 怎么选：什么时候该多花那份钱 | CatRouter">
-<meta property="og:description" content="Gemini 3.8 Flash（2026-09-02，DeepSWE v1.1 73.7%）与 Gemini 4 Argon（100 万上下文、100 万长解码、三档思考、非微调）对比，给出选型判断与两个实操建议。">
+<meta property="og:type" content="article"><meta property="og:title" content="Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上 | CatRouter">
+<meta property="og:description" content="3.8 Flash 在 2026-09-02 发布，DeepSWE v1.1 73.7%；Gemini 4 Argon 是全新基座，100 万上下文、100 万长解码、三档思考。两者的差价该不该付，看任务类型。">
 <meta property="og:url" content="https://catrouter-net.github.io/catrouter-hub/gemini/"><meta property="og:site_name" content="CatRouter 模型索引">
 <meta property="og:image" content="https://catrouter-net.github.io/catrouter-hub/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Gemini 4 Argon 与 3.8 Flash：什么时候该多花那份钱", "description": "Gemini 3.8 Flash（2026-09-02，DeepSWE v1.1 73.7%）与 Gemini 4 Argon（100 万上下文、100 万长解码、三档思考、非微调）对比，给出选型判断与两个实操建议。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/gemini/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "Gemini 4 Argon 与 3.8 Flash：什么时候该多花那份钱", "item": "https://catrouter-net.github.io/catrouter-hub/gemini/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上", "description": "3.8 Flash 在 2026-09-02 发布，DeepSWE v1.1 73.7%；Gemini 4 Argon 是全新基座，100 万上下文、100 万长解码、三档思考。两者的差价该不该付，看任务类型。", "inLanguage": "zh-CN", "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": "https://catrouter-net.github.io/catrouter-hub/gemini/", "author": {"@type": "Organization", "name": "CatRouter 技术组"}, "publisher": {"@type": "Organization", "name": "CatRouter"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://catrouter-net.github.io/catrouter-hub/"}, {"@type": "ListItem", "position": 2, "name": "Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上", "item": "https://catrouter-net.github.io/catrouter-hub/gemini/"}]}]</script>
 </head><body>
 <header class="top"><div class="shell"><a class="brand" href="../"><b>CatRouter</b><span>MODEL INDEX</span></a><nav class="navbar"><a href="../">模型索引</a><a href="../guide/">怎么挑中转站</a><a href="../claude-opus-5-5/">Opus 5.5 实测</a><a href="../gemini/" class="on">Gemini 双雄</a><a href="../price/">价格测算</a><a href="../setup/">三步接入</a><a href="../about/">关于本站</a></nav><div class="cta"><button class="copybtn" data-copy="https://catrouter.net/v1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5h10"/></svg>复制 BaseURL</button></div></div></header>
-<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / Gemini 4 Argon 与 3.8 Flash：什么时候该多花那份钱</div><h1>Gemini 4 Argon 与 3.8 Flash：什么时候该多花那份钱</h1><p class="lede" style="margin-bottom:0">日常干活用 3.8 Flash，硬活和长上下文用 4 Argon。两者差价不小，一上来就上 Argon 通常不划算。</p><div class="art-meta"><span>2026-09 发布</span><span>约 6 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
-<div class="callout"><b>结论</b>：先用 Flash 把流程跑通，摸到上限再换 Argon。多数场景换过去提升的是最后一公里。</div>
-<h2>Gemini 3.8 Flash：九月的效率档</h2>
-<p>9 月 2 日发布，是六周内的第三个 Flash 版本。关键的两个数字：DeepSWE v1.1 从 3.7 的 65.3% 提到 73.7%，离 Opus 5 的 74.0% 只差 0.3 个百分点；Terminal-Bench 2.1 同步上了一档。</p>
-<p>官方对它的描述是「更肯干」——复杂任务上会主动多走几步、反复调工具直到拿到结果，而不是急着收尾。这对 Agent 是好事，对账单是坏事：单价没涨，但步数多了，实际花费会比 3.7 时代高。做预算按「单位任务成本」算，别按「每百万 token」算。</p>
+<main><div class="art-head"><div class="shell"><div class="crumb"><a href="/catrouter-hub/">首页</a> / Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上</div><h1>Gemini 4 Argon 和 3.8 Flash：钱该花在哪个上</h1><p class="lede" style="margin-bottom:0">先说顺序：用 Flash 把流程跑通，摸到它的上限再换 Argon。多数团队换过去只是提最后一公里的准确率。</p><div class="art-meta"><span>2026-09 发布</span><span>约 6 分钟</span><span>更新 2026-11-09</span></div></div></div><div class="art-body"><div class="shell">
+<h2>3.8 Flash：九月的性价比档</h2>
+<p>9 月 2 日发布，六周内的第三个 Flash 版本。两个关键数字：DeepSWE v1.1 从 3.7 的 65.3% 提到 73.7%，离 Opus 5 的 74.0% 只差 0.3 个百分点；Terminal-Bench 2.1 也跟着上了一档。</p>
+<p>官方给它的描述是「更肯干」。复杂任务上它会多走几步、反复调工具直到拿到结果，不急着收尾。对 Agent 是好事，对账单是坏事：单价没涨，步数多了，实际花费比 3.7 时代高。预算要按「一个任务多少钱」算，别按「每百万 token」算。</p>
 <p>同期的 Flash Cyber 是安全向变体，漏洞分析、防御评估这类活走那个型号更合适。</p>
 
-<h2>Gemini 4 Argon：这一代不是 3.x 的加强版</h2>
-<p>9 月发布、10 月中旬全球上线。模型卡里有一句话值得注意：<strong>Argon 不是前代模型的修改或微调，而是新一代前沿模型</strong>。这句话决定了定位——它不跟 3.8 Flash 比性价比，它跟 Opus 5.5、GPT-6 Astra 比能力上限。</p>
-<p>规格：统一 100 万 token 上下文，长解码也能到 100 万 token；思考级别分 low / medium / high 三档；图像、视频、语言理解与推理、代码执行打通在同一条链路。意思是它看懂任务之后能直接调工具、跑代码往后推，而不是停在「描述这条视频讲了什么」。</p>
+<h2>4 Argon：这一代不是 3.x 的加强版</h2>
+<p>9 月发布、10 月中旬全球上线。模型卡里有句话值得留意：Argon 不是前代模型的修改或微调，是新一代前沿模型。所以它不跟 3.8 Flash 比性价比，它跟 Opus 5.5、GPT-6 Astra 比上限。</p>
+<p>规格：统一 100 万 token 上下文，长解码也能到 100 万；思考分 low / medium / high 三档；图像、视频、语言理解与推理、代码执行挪到同一条链路里。差别在于它看懂任务之后能直接调工具、跑代码往后推，不会停在「描述这条视频讲了什么」。</p>
 <table><colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
-<thead><tr><th>对比项</th><th>Gemini 3.8 Flash</th><th>Gemini 4 Argon</th></tr></thead><tbody>
+<thead><tr><th>对比项</th><th>3.8 Flash</th><th>4 Argon</th></tr></thead><tbody>
 <tr><td>发布</td><td>2026-09-02</td><td>2026 年 9 月发布，10 月全球上线</td></tr>
 <tr><td>上下文</td><td>Flash 档，主打吞吐</td><td>100 万 token，长解码同为 100 万</td></tr>
-<tr><td>思考控制</td><td>effort 档位</td><td>low / medium / high 三档</td></tr>
-<tr><td>强项</td><td>长程软件工程、成本</td><td>企业知识工作、安全防御、多模态 + 执行</td></tr>
-<tr><td>价格感受</td><td>便宜，适合放量</td><td>贵，适合关键任务</td></tr>
+<tr><td>思考控制</td><td>effort 档位</td><td>low / medium / high</td></tr>
+<tr><td>强在哪</td><td>长程软件工程、成本</td><td>企业知识工作、安全防御、多模态加执行</td></tr>
+<tr><td>花钱感受</td><td>便宜，适合放量</td><td>贵，适合关键任务</td></tr>
 </tbody></table>
 
-<h2>两个实操建议</h2>
-<p><strong>一、先用 Flash 把流程跑通，再换 Argon 提质。</strong>多数团队在 Flash 上就能把 Agent 的上限摸清楚，换 Argon 往往只提升最后一公里的准确率，边际收益没想象中大。</p>
-<p><strong>二、百万上下文不要一次拉满。</strong>上下文越长，延迟和费用都线性上升。更划算的是先用检索缩小范围，再把关键片段喂进去——在 Argon 上尤其重要，因为单价不低。</p>
-<p>国内调用两个型号都走 OpenAI 兼容协议，模型名分别写 <code>gemini-3.8-flash</code> 和 <code>gemini-4</code>。</p>
+<h2>两个实际建议</h2>
+<p>一、先跑 Flash。多数团队在 Flash 上就能看清 Agent 的上限，换 Argon 往往只抬最后一公里，边际收益没想象中大。</p>
+<p>二、百万上下文别一次拉满。上下文越长，延迟和费用都往上走。先用检索缩范围，再把关键片段喂进去，在 Argon 上尤其划算，因为单价不低。</p>
+<p>两个型号都走 OpenAI 兼容协议，模型名 <code>gemini-3.8-flash</code> 和 <code>gemini-4</code>。</p>
 <div class="sources"><h2>参考资料</h2><ul><li><a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener nofollow">Gemini 4 Argon 模型卡</a></li><li><a href="https://ai.google.dev/gemini-api/docs/latest-model?hl=zh-cn" target="_blank" rel="noopener nofollow">Gemini 4 Argon 的新功能（上下文与思考级别）</a></li><li><a href="https://deepmind.google/models/gemini/" target="_blank" rel="noopener nofollow">Google DeepMind · Gemini 模型页</a></li></ul></div><div class="rel"><h2>接着看</h2><a class="linkbtn" href="/catrouter-hub/models/gemini-4/">Gemini 4 详情</a><a class="linkbtn" href="/catrouter-hub/models/gemini-3.8-flash/">3.8 Flash 详情</a><a class="linkbtn" href="/catrouter-hub/price/">价格测算</a></div><p style="margin-top:22px;font-size:12.5px;color:var(--slate)">本文由 CatRouter 技术组 整理，最后更新 2026-11-09。价格与跑分随厂商更新浮动，以官方页面为准；发现数据有误可在 <a href="https://github.com/catrouter-net/">GitHub</a> 提 issue。</p></div></div></main>
 <footer><div class="shell"><div class="foot-b"><span>© 2026 CatRouter</span><a href="https://catrouter.net">https://catrouter.net</a><a href="about/">编辑与数据说明</a><a href="https://github.com/catrouter-net/">GitHub 仓库</a><span>内容更新：2026-11-09</span></div></div></footer><div class="toast" id="toast">已复制</div><script src="app.js"></script></body></html>
